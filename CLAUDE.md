@@ -70,13 +70,15 @@ Service URLs:
 - Swagger auto-generated at `/api/docs` (development only)
 - Rate limiting via `@nestjs/throttler`, caching via `@nestjs/cache-manager` + Redis
 
-**Implemented API routes (as of Phase 4):**
+**Implemented API routes (as of Phase 5):**
 - `GET /auth/*` — register, login, refresh, logout, forgot-password, reset-password
 - `GET|PATCH /users/me` — profile
 - `GET /reference/makes` · `GET /reference/makes/:id/models` · `GET /reference/cities` — public, no auth
 - `GET /listings` · `GET /listings/featured` · `GET /listings/:id` — public
 - `POST /listings` · `GET /listings/user/mine` · `PATCH /listings/:id` · `DELETE /listings/:id` — JWT required
+- `POST /listings/:id/images` — JWT required, owner only; attaches ListingImage records
 - `PATCH /listings/:id/status` · `GET /listings/admin/all` — ADMIN/EDITOR role required
+- `POST /media/upload` — JWT required, multipart/form-data `file` field; returns `{ url, publicId }`
 
 ### Web (Next.js 15)
 - App Router in `src/app/`
@@ -86,18 +88,21 @@ Service URLs:
 - Protected routes via Next.js middleware at `src/middleware.ts`
 - Path alias: `@/` maps to `src/`
 
-**Implemented pages (as of Phase 4):**
+**Implemented pages (as of Phase 5):**
 - `/` — homepage with hero, featured listings, browse by brand, features, CTA
 - `/auth/login` · `/auth/register` · `/auth/forgot-password` · `/auth/reset-password`
 - `/cars` — listings index (filters sidebar, search, grid, pagination)
 - `/cars/[id]` — listing detail (image gallery, specs, seller card)
-- `/dashboard` — placeholder
+- `/post-ad` — 3-step form: Vehicle Info → Pricing & Details → Photos (Cloudinary upload)
+- `/dashboard` — real user listings with status badges, delete action
 
 **Key frontend components:**
 - `components/listings/listing-card.tsx` — card with PKR Lakh/Crore price formatting
 - `components/listings/listing-filters.tsx` — `ListingFiltersPanel` with cascading selects
 - `components/listings/featured-section.tsx` — homepage featured grid
 - `components/listings/makes-section.tsx` — homepage Browse by Brand grid
+- `lib/validators/listing.validators.ts` — Zod schemas for post-ad form (step1/step2/full)
+- `lib/api/media.ts` — `uploadImageApi(file)` and `addListingImagesApi(listingId, images[])`
 
 ### Shared Packages
 - `@pw-clone/types` — consumed by both api and web. Types are in `packages/types/src/`. After editing, types must be rebuilt or Turborepo handles it via `turbo run build`.

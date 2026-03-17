@@ -215,6 +215,33 @@ export class ListingsService {
     await this.prisma.listing.delete({ where: { id } })
   }
 
+  // ─── Add Images (owner only) ──────────────────────────────────────────────────
+
+  async addImages(
+    listingId: string,
+    userId: string,
+    images: { url: string; publicId: string; isPrimary?: boolean; order?: number }[],
+  ) {
+    const listing = await this.prisma.listing.findUnique({ where: { id: listingId } })
+    if (!listing) throw new NotFoundException('Listing not found')
+    if (listing.userId !== userId) throw new ForbiddenException('Not your listing')
+
+    const existingCount = await this.prisma.listingImage.count({ where: { listingId } })
+    const data = images.map((img, idx) => ({
+      listingId,
+      url: img.url,
+      publicId: img.publicId,
+      isPrimary: img.isPrimary ?? (existingCount === 0 && idx === 0),
+      order: img.order ?? existingCount + idx,
+    }))
+
+    await this.prisma.listingImage.createMany({ data })
+    return this.prisma.listingImage.findMany({
+      where: { listingId },
+      orderBy: { order: 'asc' },
+    })
+  }
+
   // ─── Update Status (admin only) ───────────────────────────────────────────────
 
   async updateStatus(id: string, status: ListingStatus, rejectedReason?: string) {

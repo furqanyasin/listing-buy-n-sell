@@ -96,13 +96,18 @@
 - [x] `MakesSection` component (homepage Browse by Brand)
 - [x] Homepage updated — real data replaces skeleton placeholders
 
-## Phase 5 — Post Ad & Image Upload
-- [ ] Media module: `POST /media/upload` (Multer + Cloudinary)
-- [ ] Link images to listing after creation
-- [ ] Multi-step Post Ad form (Vehicle Info → Pricing & Location → Photos)
-- [ ] Form: react-hook-form + zod, cascading selects from reference hooks
-- [ ] `/post-ad` page (protected)
-- [ ] Dashboard: my listings management (edit/delete)
+## Phase 5 — Post Ad & Image Upload ✅ COMPLETE
+- [x] Media module: `POST /media/upload` (Multer + Cloudinary, memoryStorage, 10 MB limit, JPEG/PNG/WebP)
+- [x] Cloudinary image transformation (resize 1280x960, quality:auto, fetch_format:auto)
+- [x] `POST /listings/:id/images` — attach uploaded images to a listing (owner only)
+- [x] Multi-step Post Ad form (Step 1: Vehicle Info, Step 2: Pricing & Details, Step 3: Photos)
+- [x] Zod schemas: `listingStep1Schema`, `listingStep2Schema`, `listingFullSchema`
+- [x] react-hook-form + zod resolver, cascading make→model selects from reference hooks
+- [x] Photo upload drag-and-drop, preview grid, cover badge, per-image upload status
+- [x] `/post-ad` page (protected) — 3-step form with progress stepper
+- [x] Dashboard: real listings from `useMyListings()`, status badge, delete action
+- [x] Fixed `ListingCard` type: `primaryImage` → `images: ListingImage[]` (matches API response)
+- [x] `ListingCard` type now includes `status`, `bodyType`, `locationText` fields
 
 ## Phase 6 — Search & Advanced Filtering
 - [ ] Elasticsearch setup (or use existing Prisma full-text until Phase 6)

@@ -65,14 +65,18 @@ export interface ListingCard
     | 'mileage'
     | 'fuelType'
     | 'transmission'
+    | 'bodyType'
     | 'condition'
+    | 'status'
     | 'isFeatured'
+    | 'locationText'
     | 'createdAt'
   > {
   make: Make
   model: VehicleModel
-  city: Pick<City, 'id' | 'name'>
-  primaryImage: ListingImage | null
+  city: Pick<City, 'id' | 'name' | 'province'>
+  /** Array of images — primary image is first item (filtered on API side) */
+  images: ListingImage[]
 }
 
 export interface CreateListingRequest {

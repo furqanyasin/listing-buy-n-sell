@@ -20,6 +20,7 @@ import { UserRole } from '@prisma/client'
 import { CurrentUser } from '../../common/decorators/current-user.decorator'
 import { Public } from '../../common/decorators/public.decorator'
 import { Roles } from '../../common/decorators/roles.decorator'
+import { AddListingImagesDto } from './dto/add-listing-images.dto'
 import { CreateListingDto } from './dto/create-listing.dto'
 import { ListingFiltersDto } from './dto/listing-filters.dto'
 import { UpdateListingDto } from './dto/update-listing.dto'
@@ -72,6 +73,18 @@ export class ListingsController {
   @ApiOperation({ summary: "Get the current user's own listings" })
   findMine(@CurrentUser() user: { id: string }) {
     return this.listingsService.findMine(user.id)
+  }
+
+  @Post(':id/images')
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Attach uploaded images to a listing (owner only)' })
+  @ApiParam({ name: 'id', description: 'Listing ID' })
+  addImages(
+    @Param('id') id: string,
+    @CurrentUser() user: { id: string },
+    @Body() dto: AddListingImagesDto,
+  ) {
+    return this.listingsService.addImages(id, user.id, dto.images)
   }
 
   @Patch(':id')

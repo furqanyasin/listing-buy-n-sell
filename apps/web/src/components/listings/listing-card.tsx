@@ -22,7 +22,7 @@ function formatMileage(km: number): string {
 }
 
 export function ListingCard({ listing, className }: ListingCardProps) {
-  const primaryImage = listing.primaryImage ?? null
+  const primaryImage = listing.images?.[0] ?? null
   const fuelLabel = listing.fuelType.charAt(0) + listing.fuelType.slice(1).toLowerCase()
   const transmLabel = listing.transmission === 'AUTOMATIC' ? 'Auto' : 'Manual'
 
