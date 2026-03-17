@@ -70,7 +70,7 @@ Service URLs:
 - Swagger auto-generated at `/api/docs` (development only)
 - Rate limiting via `@nestjs/throttler`, caching via `@nestjs/cache-manager` + Redis
 
-**Implemented API routes (as of Phase 5):**
+**Implemented API routes (as of Phase 8):**
 - `GET /auth/*` — register, login, refresh, logout, forgot-password, reset-password
 - `GET|PATCH /users/me` — profile
 - `GET /reference/makes` · `GET /reference/makes/:id/models` · `GET /reference/cities` — public, no auth
@@ -79,6 +79,9 @@ Service URLs:
 - `POST /listings/:id/images` — JWT required, owner only; attaches ListingImage records
 - `PATCH /listings/:id/status` · `GET /listings/admin/all` — ADMIN/EDITOR role required
 - `POST /media/upload` — JWT required, multipart/form-data `file` field; returns `{ url, publicId }`
+- `GET /dealers` · `GET /dealers/:slug` — public dealer directory and profile (with active listings)
+- `POST /dealers` · `GET /dealers/me/profile` · `PATCH /dealers/:id` — JWT required
+- `PATCH /dealers/:id/verify` — ADMIN role required
 
 ### Web (Next.js 15)
 - App Router in `src/app/`
@@ -88,13 +91,16 @@ Service URLs:
 - Protected routes via Next.js middleware at `src/middleware.ts`
 - Path alias: `@/` maps to `src/`
 
-**Implemented pages (as of Phase 5):**
+**Implemented pages (as of Phase 8):**
 - `/` — homepage with hero, featured listings, browse by brand, features, CTA
 - `/auth/login` · `/auth/register` · `/auth/forgot-password` · `/auth/reset-password`
-- `/cars` — listings index (filters sidebar, search, grid, pagination)
-- `/cars/[id]` — listing detail (image gallery, specs, seller card)
+- `/cars` — listings index (URL-synced filters, active filter chips, search, grid, pagination)
+- `/cars/[id]` — listing detail (lightbox gallery, related listings, share, WhatsApp, SEO metadata)
 - `/post-ad` — 3-step form: Vehicle Info → Pricing & Details → Photos (Cloudinary upload)
 - `/dashboard` — real user listings with status badges, delete action
+- `/dealers` — public dealer directory (cover banner, logo, verified badge, listing count)
+- `/dealers/[slug]` — dealer profile (contact card, active inventory grid)
+- `/dealers/register` — dealer registration form
 
 **Key frontend components:**
 - `components/listings/listing-card.tsx` — card with PKR Lakh/Crore price formatting
@@ -104,6 +110,8 @@ Service URLs:
 - `lib/validators/listing.validators.ts` — Zod schemas for post-ad form (step1/step2/full)
 - `lib/api/media.ts` — `uploadImageApi(file)` and `addListingImagesApi(listingId, images[])`
 - `components/listings/active-filters.tsx` — removable filter chips with human-readable labels
+- `lib/api/dealers.ts` — `getDealersApi`, `getDealerApi`, `registerDealerApi`, `getMyDealerApi`, `updateDealerApi`
+- `lib/hooks/use-dealers.ts` — `useDealers`, `useDealer`, `useMyDealer`, `useRegisterDealer`, `useUpdateDealer`
 
 ### Shared Packages
 - `@pw-clone/types` — consumed by both api and web. Types are in `packages/types/src/`. After editing, types must be rebuilt or Turborepo handles it via `turbo run build`.

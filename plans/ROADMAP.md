@@ -128,76 +128,21 @@
 - [x] SEO metadata — `generateMetadata` in Server Component, fetches listing data server-side, sets title/description/og:image/twitter:card
 - [x] Page split into Server Component (`page.tsx`) + Client Component (`listing-detail-client.tsx`)
 
-## Phase 8 — Dealer Profiles
-- [ ] Dealer registration flow
-- [ ] Dealer profile public page
-- [ ] Dealer inventory listing
-- [ ] Dealer verification badge (admin)
-
-## Phase 9 — User Dashboard
-- [ ] Dashboard home with stats
-- [ ] My ads management (edit/delete/renew)
-- [ ] Account settings page
-- [ ] Change password
-
-## Phase 10 — Favorites & Messaging
-- [ ] Save / unsave listings
-- [ ] Saved listings page
-- [ ] Start conversation (contact seller)
-- [ ] Conversations list page
-- [ ] Message thread view
-- [ ] Real-time updates (polling or WebSocket)
-
-## Phase 11 — Blog & Content
-- [ ] Blog listing page
-- [ ] Blog detail page
-- [ ] Blog categories
-- [ ] Blog CMS (admin create/edit)
-
-## Phase 12 — Reviews & Ratings
-- [ ] Leave review on seller/dealer
-- [ ] Star rating display
-- [ ] Reviews section on profiles
-
-## Phase 13 — Notifications
-- [ ] Notification bell (header)
-- [ ] Notification types
-- [ ] Mark as read
-- [ ] Backend notification creation service
-
-## Phase 14 — Admin Panel
-- [ ] Listings moderation (approve/reject)
-- [ ] User management (ban/verify)
-- [ ] Featured listings management
-- [ ] Blog management
-- [ ] Basic analytics dashboard
-
-## Phase 15 — Optimization & SEO
-- [ ] Dynamic OG tags
-- [ ] Sitemap.xml generation
-- [ ] Schema.org Vehicle markup
-- [ ] Redis caching for hot routes
-- [ ] Database index optimization
-- [ ] Lighthouse score 90+
-
-## Phase 16 — Production Deployment
-- [ ] Production Dockerfile (web + api)
-- [ ] Environment secrets management
-- [ ] SSL setup
-- [ ] Monitoring (Sentry)
-- [ ] DB backup strategy
-
-## Phase 17 — Testing & Launch
-- [ ] E2E test suite (Playwright)
-- [ ] Security audit
-- [ ] Load testing
-- [ ] Public launch
-
-## Phase 8 — Dealer Profiles
-- [ ] Dealer registration flow
-- [ ] Dealer profile public page
-- [ ] Dealer inventory listing
-- [ ] Dealer verification badge (admin)
+## Phase 8 — Dealer Profiles ✅ COMPLETE
+- [x] `POST /dealers` — register as dealer (creates profile + upgrades user role to DEALER in transaction)
+- [x] `GET /dealers` — public list, ordered by isFeatured → isVerified → createdAt
+- [x] `GET /dealers/:slug` — public profile with active inventory (separate listings query via userId)
+- [x] `GET /dealers/me/profile` — authenticated dealer fetches own profile
+- [x] `PATCH /dealers/:id` — owner-only update
+- [x] `PATCH /dealers/:id/verify` — admin sets isVerified = true
+- [x] `slugify()` with numeric suffix for unique slugs
+- [x] `listingsCount` derived from `user._count.listings` (listings belong to User, not Dealer)
+- [x] `Dealer` and `DealerProfile` types in `@pw-clone/types`
+- [x] `getDealersApi`, `getDealerApi`, `registerDealerApi`, `getMyDealerApi`, `updateDealerApi`
+- [x] `useDealers`, `useDealer`, `useMyDealer`, `useRegisterDealer`, `useUpdateDealer` hooks
+- [x] `/dealers` — public dealer directory (cover banner, logo, verified badge, listing count)
+- [x] `/dealers/[slug]` — public dealer profile (cover, logo, contact card, active inventory grid)
+- [x] `/dealers/register` — dealer registration form (react-hook-form + zod)
 
 ## Phase 9 — User Dashboard
 - [ ] Dashboard home with stats
