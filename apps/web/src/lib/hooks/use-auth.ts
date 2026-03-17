@@ -10,7 +10,6 @@ import type { LoginPayload, RegisterPayload } from '@/lib/api/auth'
 // ─── useLogin ─────────────────────────────────────────────────────────────────
 
 export function useLogin() {
-  const { setAuth } = useAuthStore()
   const router = useRouter()
 
   return useMutation({

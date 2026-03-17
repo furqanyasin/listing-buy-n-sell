@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest",
+    "test": "vitest run --passWithNoTests",
     "test:ui": "vitest --ui",
+    "typecheck": "tsc --noEmit",
     "clean": "rm -rf .next out"
   },
   "dependencies": {

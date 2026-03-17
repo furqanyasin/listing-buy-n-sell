@@ -42,8 +42,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run type check
-        run: npx tsc --noEmit
+      - name: Generate Prisma client (needed for API types)
+        working-directory: apps/api
+        run: npx prisma generate
+
+      - name: Type check API
+        working-directory: apps/api
+        run: npm run typecheck
+
+      - name: Type check Web
+        working-directory: apps/web
+        run: npm run typecheck
 
   # ── Test API ─────────────────────────────────────────────────────────────
   test-api:
@@ -142,5 +151,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate Prisma client
+        working-directory: apps/api
+        run: npx prisma generate
+
       - name: Build all apps
         run: npm run build
+        env:
+          NEXT_PUBLIC_API_URL: https://placeholder.example.com/api/v1

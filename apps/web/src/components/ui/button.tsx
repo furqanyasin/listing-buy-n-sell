@@ -65,8 +65,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    const Comp = asChild ? Slot : 'button'
-
     // When asChild, Slot must receive exactly one child element — skip the
     // loading spinner wrapper and pass children directly.
     if (asChild) {
