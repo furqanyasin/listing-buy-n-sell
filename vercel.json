@@ -1,0 +1,6 @@
+{
+  "buildCommand": "cd ../.. && npx turbo run build --filter=@pw-clone/web",
+  "outputDirectory": "apps/web/.next",
+  "installCommand": "npm install",
+  "framework": "nextjs"
+}
