@@ -96,6 +96,9 @@ export class ListingsService {
         OR: [
           { title: { contains: filters.q, mode: 'insensitive' } },
           { description: { contains: filters.q, mode: 'insensitive' } },
+          { make: { name: { contains: filters.q, mode: 'insensitive' } } },
+          { model: { name: { contains: filters.q, mode: 'insensitive' } } },
+          { city: { name: { contains: filters.q, mode: 'insensitive' } } },
         ],
       }),
       ...(filters.makeId && { makeId: filters.makeId }),

@@ -9,10 +9,63 @@ import { Input } from '@/components/ui/input'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ListingCard } from '@/components/listings/listing-card'
 import { ListingFiltersPanel } from '@/components/listings/listing-filters'
+import { ActiveFilters } from '@/components/listings/active-filters'
 import { useListings } from '@/lib/hooks/use-listings'
 import { Pagination } from '@/components/ui/pagination'
 import type { ListingFilters } from '@pw-clone/types'
 import { cn } from '@/lib/utils'
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+/** Derive a ListingFilters object from URL search params */
+function filtersFromParams(sp: ReturnType<typeof useSearchParams>): ListingFilters {
+  const f: ListingFilters = { page: 1, limit: 24 }
+  const str = (k: string) => sp.get(k) || undefined
+  const num = (k: string) => { const v = sp.get(k); return v ? Number(v) : undefined }
+
+  f.q = str('q')
+  f.makeId = str('makeId')
+  f.modelId = str('modelId')
+  f.cityId = str('cityId')
+  f.fuelType = str('fuelType') as ListingFilters['fuelType']
+  f.transmission = str('transmission') as ListingFilters['transmission']
+  f.bodyType = str('bodyType') as ListingFilters['bodyType']
+  f.condition = str('condition') as ListingFilters['condition']
+  f.sortBy = str('sortBy') as ListingFilters['sortBy']
+  f.sortOrder = str('sortOrder') as ListingFilters['sortOrder']
+  f.yearMin = num('yearMin')
+  f.yearMax = num('yearMax')
+  f.priceMin = num('priceMin')
+  f.priceMax = num('priceMax')
+  f.mileageMax = num('mileageMax')
+  f.page = num('page') ?? 1
+  return f
+}
+
+/** Build a URL query string from a ListingFilters object */
+function filtersToParams(f: ListingFilters): string {
+  const p = new URLSearchParams()
+  const set = (k: string, v: string | number | undefined) => {
+    if (v !== undefined && v !== null && v !== '') p.set(k, String(v))
+  }
+  set('q', f.q)
+  set('makeId', f.makeId)
+  set('modelId', f.modelId)
+  set('cityId', f.cityId)
+  set('fuelType', f.fuelType)
+  set('transmission', f.transmission)
+  set('bodyType', f.bodyType)
+  set('condition', f.condition)
+  set('sortBy', f.sortBy)
+  set('sortOrder', f.sortOrder)
+  set('yearMin', f.yearMin)
+  set('yearMax', f.yearMax)
+  set('priceMin', f.priceMin)
+  set('priceMax', f.priceMax)
+  set('mileageMax', f.mileageMax)
+  if (f.page && f.page > 1) set('page', f.page)
+  return p.toString()
+}
 
 // ─── Inner component (uses useSearchParams — must be inside Suspense) ─────────
 
@@ -20,30 +73,36 @@ function CarsContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
 
-  const [showFilters, setShowFilters] = useState(false)
-  const [searchInput, setSearchInput] = useState(searchParams.get('q') ?? '')
+  // Derive filters directly from URL — URL is the single source of truth
+  const filters = filtersFromParams(searchParams)
 
-  const [filters, setFilters] = useState<ListingFilters>(() => {
-    const f: ListingFilters = { page: 1, limit: 24 }
-    const q = searchParams.get('q')
-    if (q) f.q = q
-    return f
-  })
+  // Search input is a controlled field; only committed on submit
+  const [searchInput, setSearchInput] = useState(searchParams.get('q') ?? '')
+  const [showFilters, setShowFilters] = useState(false)
 
   const { data, isLoading } = useListings(filters)
 
-  const handleFiltersChange = useCallback((newFilters: ListingFilters) => {
-    setFilters(newFilters)
-  }, [])
+  /** Push a new filter state to the URL */
+  const pushFilters = useCallback(
+    (newFilters: ListingFilters) => {
+      const qs = filtersToParams(newFilters)
+      router.replace(qs ? `/cars?${qs}` : '/cars', { scroll: false })
+    },
+    [router],
+  )
+
+  function handleFiltersChange(newFilters: ListingFilters) {
+    pushFilters(newFilters)
+  }
 
   function handleSearch(e: React.FormEvent) {
     e.preventDefault()
-    setFilters((f) => ({ ...f, q: searchInput || undefined, page: 1 }))
-    if (searchInput) {
-      router.replace(`/cars?q=${encodeURIComponent(searchInput)}`, { scroll: false })
-    } else {
-      router.replace('/cars', { scroll: false })
-    }
+    pushFilters({ ...filters, q: searchInput || undefined, page: 1 })
+  }
+
+  function clearSearch() {
+    setSearchInput('')
+    pushFilters({ ...filters, q: undefined, page: 1 })
   }
 
   const listings = data?.data ?? []
@@ -56,13 +115,13 @@ function CarsContent() {
         <h1 className="text-2xl font-bold text-surface-900">Used Cars in Pakistan</h1>
         {meta && (
           <p className="text-sm text-surface-500 mt-1">
-            {meta.total.toLocaleString()} listings found
+            {meta.total.toLocaleString()} listing{meta.total !== 1 ? 's' : ''} found
           </p>
         )}
       </div>
 
       {/* Search bar */}
-      <form onSubmit={handleSearch} className="flex gap-2 mb-6">
+      <form onSubmit={handleSearch} className="flex gap-2 mb-4">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-surface-400" />
           <Input
@@ -75,10 +134,7 @@ function CarsContent() {
             <button
               type="button"
               className="absolute right-3 top-1/2 -translate-y-1/2 text-surface-400 hover:text-surface-600"
-              onClick={() => {
-                setSearchInput('')
-                setFilters((f) => ({ ...f, q: undefined, page: 1 }))
-              }}
+              onClick={clearSearch}
             >
               <X className="h-4 w-4" />
             </button>
@@ -95,6 +151,9 @@ function CarsContent() {
           Filters
         </Button>
       </form>
+
+      {/* Active filter chips */}
+      <ActiveFilters filters={filters} onChange={handleFiltersChange} />
 
       <div className="flex gap-6">
         {/* Filters sidebar */}
@@ -150,7 +209,7 @@ function CarsContent() {
                   <Pagination
                     currentPage={meta.page}
                     totalPages={meta.totalPages}
-                    onPageChange={(page) => setFilters((f) => ({ ...f, page }))}
+                    onPageChange={(page) => pushFilters({ ...filters, page })}
                   />
                 </div>
               )}

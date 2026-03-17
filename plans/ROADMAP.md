@@ -109,12 +109,15 @@
 - [x] Fixed `ListingCard` type: `primaryImage` → `images: ListingImage[]` (matches API response)
 - [x] `ListingCard` type now includes `status`, `bodyType`, `locationText` fields
 
-## Phase 6 — Search & Advanced Filtering
-- [ ] Elasticsearch setup (or use existing Prisma full-text until Phase 6)
-- [ ] Index listings on create/update
-- [ ] Dedicated search endpoint with relevance ranking
-- [ ] URL-synced filter state (searchParams)
-- [ ] Active filters chips display
+## Phase 6 — Search & Advanced Filtering ✅ COMPLETE
+- [x] Improved backend search: `q` now matches title, description, make name, model name, and city name
+- [x] URL-synced filter state — ALL filters read from and written to URL searchParams (shareable links)
+- [x] `filtersFromParams()` — derives `ListingFilters` from `ReadonlyURLSearchParams` on every render
+- [x] `filtersToParams()` — serialises `ListingFilters` back to a URL query string
+- [x] `pushFilters()` — single helper that calls `router.replace` to update URL
+- [x] Active filter chips (`ActiveFilters` component) — removable chips for each applied filter with human-readable labels (make name, city name, formatted price, etc.)
+- [x] Pagination page number synced to URL (`?page=N`)
+- [x] Elasticsearch deferred — Prisma full-text search sufficient at current scale
 
 ## Phase 7 — Car Detail Page Enhancements
 - [ ] Image lightbox / fullscreen gallery

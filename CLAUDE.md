@@ -103,6 +103,7 @@ Service URLs:
 - `components/listings/makes-section.tsx` — homepage Browse by Brand grid
 - `lib/validators/listing.validators.ts` — Zod schemas for post-ad form (step1/step2/full)
 - `lib/api/media.ts` — `uploadImageApi(file)` and `addListingImagesApi(listingId, images[])`
+- `components/listings/active-filters.tsx` — removable filter chips with human-readable labels
 
 ### Shared Packages
 - `@pw-clone/types` — consumed by both api and web. Types are in `packages/types/src/`. After editing, types must be rebuilt or Turborepo handles it via `turbo run build`.
