@@ -13,6 +13,8 @@ import { ListingsModule } from './modules/listings/listings.module'
 import { MediaModule } from './modules/media/media.module'
 import { SearchModule } from './modules/search/search.module'
 import { DealersModule } from './modules/dealers/dealers.module'
+import { FavoritesModule } from './modules/favorites/favorites.module'
+import { ConversationsModule } from './modules/conversations/conversations.module'
 import { BlogModule } from './modules/blog/blog.module'
 import { AdminModule } from './modules/admin/admin.module'
 import { ReferenceModule } from './modules/reference/reference.module'
@@ -50,6 +52,8 @@ import { PrismaModule } from './prisma/prisma.module'
     MediaModule,
     SearchModule,
     DealersModule,
+    FavoritesModule,
+    ConversationsModule,
     BlogModule,
     AdminModule,
     ReferenceModule,

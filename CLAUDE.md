@@ -70,7 +70,7 @@ Service URLs:
 - Swagger auto-generated at `/api/docs` (development only)
 - Rate limiting via `@nestjs/throttler`, caching via `@nestjs/cache-manager` + Redis
 
-**Implemented API routes (as of Phase 9):**
+**Implemented API routes (as of Phase 10):**
 - `GET /auth/*` — register, login, refresh, logout, forgot-password, reset-password
 - `GET|PATCH /users/me` — profile
 - `GET /reference/makes` · `GET /reference/makes/:id/models` · `GET /reference/cities` — public, no auth
@@ -84,6 +84,8 @@ Service URLs:
 - `PATCH /dealers/:id/verify` — ADMIN role required
 - `GET /listings/user/mine/:id` — JWT (owner), any-status listing for edit form
 - `PATCH /auth/change-password` — JWT, verify current password then update
+- `POST /favorites/:listingId` · `GET /favorites` · `GET /favorites/ids` — JWT
+- `POST /conversations` · `GET /conversations` · `GET /conversations/:id` · `POST /conversations/:id/messages` · `PATCH /conversations/:id/read` — JWT
 
 ### Web (Next.js 15)
 - App Router in `src/app/`
@@ -93,7 +95,7 @@ Service URLs:
 - Protected routes via Next.js middleware at `src/middleware.ts`
 - Path alias: `@/` maps to `src/`
 
-**Implemented pages (as of Phase 9):**
+**Implemented pages (as of Phase 10):**
 - `/` — homepage with hero, featured listings, browse by brand, features, CTA
 - `/auth/login` · `/auth/register` · `/auth/forgot-password` · `/auth/reset-password`
 - `/cars` — listings index (URL-synced filters, active filter chips, search, grid, pagination)
@@ -106,6 +108,9 @@ Service URLs:
 - `/dashboard` — stats (real views), listing rows with edit/view/delete actions
 - `/dashboard/listings/[id]/edit` — prefilled edit form for any-status listing
 - `/dashboard/settings` — avatar upload, profile edit, change password
+- `/dashboard/saved` — saved/favorited listings grid
+- `/dashboard/messages` — conversations list (15s polling)
+- `/dashboard/messages/[id]` — message thread (3s polling, auto-scroll)
 
 **Key frontend components:**
 - `components/listings/listing-card.tsx` — card with PKR Lakh/Crore price formatting

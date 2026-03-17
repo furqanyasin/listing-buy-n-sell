@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Car, Heart, Eye, Plus, Trash2, ExternalLink, Pencil, Settings } from 'lucide-react'
+import { Car, Heart, Eye, Plus, Trash2, ExternalLink, Pencil, Settings, MessageCircle } from 'lucide-react'
 import { PageWrapper } from '@/components/layout'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -102,7 +102,6 @@ export default function DashboardPage() {
   const deleteMutation = useDeleteListing()
 
   const activeCount = listings.filter((l) => l.status === 'ACTIVE').length
-  const totalViews = listings.reduce((sum, l) => sum + (l.viewsCount ?? 0), 0)
 
   function handleDelete(id: string) {
     if (!confirm('Are you sure you want to delete this listing?')) return
@@ -110,10 +109,10 @@ export default function DashboardPage() {
   }
 
   const stats = [
-    { label: 'My Ads', value: listings.length.toString(), icon: Car, color: 'text-brand-500 bg-brand-50' },
-    { label: 'Active Ads', value: activeCount.toString(), icon: Eye, color: 'text-green-500 bg-green-50' },
-    { label: 'Saved Cars', value: '0', icon: Heart, color: 'text-red-500 bg-red-50' },
-    { label: 'Total Views', value: totalViews.toString(), icon: Eye, color: 'text-blue-500 bg-blue-50' },
+    { label: 'My Ads', value: listings.length.toString(), icon: Car, color: 'text-brand-500 bg-brand-50', href: undefined },
+    { label: 'Active Ads', value: activeCount.toString(), icon: Eye, color: 'text-green-500 bg-green-50', href: undefined },
+    { label: 'Saved Cars', value: '→', icon: Heart, color: 'text-red-500 bg-red-50', href: '/dashboard/saved' },
+    { label: 'Messages', value: '→', icon: MessageCircle, color: 'text-purple-500 bg-purple-50', href: '/dashboard/messages' },
   ]
 
   return (
@@ -141,8 +140,19 @@ export default function DashboardPage() {
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {stats.map((stat) => (
-          <Card key={stat.label}>
-            <CardContent className="p-5">
+          <Card key={stat.label} className={stat.href ? 'cursor-pointer hover:shadow-card-hover transition-shadow' : ''}>
+            <CardContent className="p-5" {...(stat.href ? { onClick: () => {} } : {})}>
+              {stat.href ? (
+                <Link href={stat.href} className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-surface-500">{stat.label}</p>
+                    <p className="text-2xl font-bold text-surface-900 mt-1">{stat.value}</p>
+                  </div>
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${stat.color}`}>
+                    <stat.icon className="h-6 w-6" />
+                  </div>
+                </Link>
+              ) : (
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-surface-500">{stat.label}</p>
@@ -152,6 +162,7 @@ export default function DashboardPage() {
                   <stat.icon className="h-6 w-6" />
                 </div>
               </div>
+              )}
             </CardContent>
           </Card>
         ))}

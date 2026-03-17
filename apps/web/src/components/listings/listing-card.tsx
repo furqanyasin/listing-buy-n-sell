@@ -1,8 +1,12 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
-import { MapPin, Gauge, Fuel, Calendar, Zap } from 'lucide-react'
+import { MapPin, Gauge, Fuel, Calendar, Zap, Heart } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
+import { useAuthStore } from '@/store/auth.store'
+import { useFavoriteIds, useToggleFavorite } from '@/lib/hooks/use-favorites'
 import type { ListingCard } from '@pw-clone/types'
 
 interface ListingCardProps {
@@ -25,6 +29,11 @@ export function ListingCard({ listing, className }: ListingCardProps) {
   const primaryImage = listing.images?.[0] ?? null
   const fuelLabel = listing.fuelType.charAt(0) + listing.fuelType.slice(1).toLowerCase()
   const transmLabel = listing.transmission === 'AUTOMATIC' ? 'Auto' : 'Manual'
+
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const { data: favoriteIds } = useFavoriteIds()
+  const toggleFavorite = useToggleFavorite()
+  const isFavorited = favoriteIds?.includes(listing.id) ?? false
 
   return (
     <Link
@@ -74,6 +83,26 @@ export function ListingCard({ listing, className }: ListingCardProps) {
             </Badge>
           )}
         </div>
+
+        {/* Favorite button */}
+        {isAuthenticated && (
+          <button
+            type="button"
+            aria-label={isFavorited ? 'Remove from saved' : 'Save listing'}
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              toggleFavorite.mutate(listing.id)
+            }}
+            className={cn(
+              'absolute top-2 right-2 w-8 h-8 rounded-full flex items-center justify-center transition-colors',
+              'bg-white/80 hover:bg-white shadow-sm',
+              isFavorited ? 'text-red-500' : 'text-surface-400 hover:text-red-400',
+            )}
+          >
+            <Heart className={cn('h-4 w-4', isFavorited && 'fill-current')} />
+          </button>
+        )}
       </div>
 
       {/* Info */}

@@ -157,13 +157,23 @@
 - [x] Auth store synced after profile update (header shows updated name immediately)
 - [x] `useMyListing(id)`, `useUpdateListing(id)` hooks added
 
-## Phase 10 — Favorites & Messaging
-- [ ] Save / unsave listings
-- [ ] Saved listings page
-- [ ] Start conversation (contact seller)
-- [ ] Conversations list page
-- [ ] Message thread view
-- [ ] Real-time updates (polling or WebSocket)
+## Phase 10 — Favorites & Messaging ✅ COMPLETE
+- [x] `POST /favorites/:listingId` — toggle favorite (add/remove, returns `{ isFavorited }`)
+- [x] `GET /favorites` — saved listings for current user
+- [x] `GET /favorites/ids` — lightweight ID list for client-side toggle state
+- [x] Heart button on `ListingCard` — optimistic toggle, only shown when authenticated
+- [x] `/dashboard/saved` — saved cars grid
+- [x] `POST /conversations` — find-or-create conversation per `(listingId, buyerId)` pair
+- [x] `GET /conversations` — all conversations (buyer + seller), ordered by updatedAt
+- [x] `GET /conversations/:id` — detail with messages
+- [x] `POST /conversations/:id/messages` — send message, touches conversation updatedAt
+- [x] `PATCH /conversations/:id/read` — mark incoming messages as read
+- [x] `unreadCount` computed via Prisma filtered `_count` (messages where readAt null AND senderId != userId)
+- [x] `/dashboard/messages` — conversation list with last message preview + unread badge; 15s polling
+- [x] `/dashboard/messages/[id]` — message thread with send form; 3s polling, auto-scroll, mark-read on open
+- [x] "Chat with Seller" button on listing detail → creates/finds conversation → navigates to thread
+- [x] "Save Car" heart button on listing detail page
+- [x] Dashboard stats cards: Saved Cars + Messages link to respective pages
 
 ## Phase 11 — Blog & Content
 - [ ] Blog listing page

@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import {
   MapPin,
   Gauge,
@@ -17,6 +18,7 @@ import {
   Eye,
   Share2,
   MessageCircle,
+  Heart,
   X,
   Maximize2,
 } from 'lucide-react'
@@ -28,6 +30,10 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { Separator } from '@/components/ui/separator'
 import { ListingCard } from '@/components/listings/listing-card'
 import { useListing, useRelatedListings } from '@/lib/hooks/use-listings'
+import { useFavoriteIds, useToggleFavorite } from '@/lib/hooks/use-favorites'
+import { useCreateConversation } from '@/lib/hooks/use-conversations'
+import { useAuthStore } from '@/store/auth.store'
+import { cn } from '@/lib/utils'
 import type { ListingImage } from '@pw-clone/types'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -181,10 +187,29 @@ function ImageLightbox({
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export function ListingDetailClient({ id }: { id: string }) {
+  const router = useRouter()
   const { data: listing, isLoading, isError } = useListing(id)
   const [activeImage, setActiveImage] = useState(0)
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState(0)
+
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const userId = useAuthStore((s) => s.user?.id)
+  const { data: favoriteIds } = useFavoriteIds()
+  const toggleFavorite = useToggleFavorite()
+  const createConversation = useCreateConversation()
+  const isFavorited = favoriteIds?.includes(id) ?? false
+  const isOwnListing = listing?.seller?.id === userId
+
+  async function handleChat() {
+    if (!isAuthenticated) {
+      router.push(`/auth/login?redirect=/cars/${id}`)
+      return
+    }
+    createConversation.mutate(id, {
+      onSuccess: (conv) => router.push(`/dashboard/messages/${conv.id}`),
+    })
+  }
 
   const images = listing?.images ?? []
 
@@ -472,6 +497,31 @@ export function ListingDetailClient({ id }: { id: string }) {
                     <MessageCircle className="h-4 w-4" />
                     WhatsApp
                   </a>
+                </Button>
+              )}
+
+              {/* Chat in-app */}
+              {!isOwnListing && (
+                <Button
+                  variant="outline"
+                  className="w-full gap-2"
+                  onClick={handleChat}
+                  isLoading={createConversation.isPending}
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  Chat with Seller
+                </Button>
+              )}
+
+              {/* Save */}
+              {isAuthenticated && (
+                <Button
+                  variant="ghost"
+                  className={cn('w-full gap-2', isFavorited && 'text-red-500 hover:text-red-600')}
+                  onClick={() => toggleFavorite.mutate(id)}
+                >
+                  <Heart className={cn('h-4 w-4', isFavorited && 'fill-current')} />
+                  {isFavorited ? 'Saved' : 'Save Car'}
                 </Button>
               )}
 
