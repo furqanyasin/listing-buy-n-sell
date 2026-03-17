@@ -40,6 +40,7 @@ export interface Listing {
   bodyType: BodyType
   color: string
   condition: VehicleCondition
+  locationText: string | null
   status: ListingStatus
   viewsCount: number
   isFeatured: boolean
@@ -49,7 +50,7 @@ export interface Listing {
   make: Make
   model: VehicleModel
   city: City
-  seller: Pick<User, 'id' | 'name' | 'phone' | 'avatarUrl'>
+  seller: Pick<User, 'id' | 'name' | 'phone' | 'avatarUrl'> & { createdAt: string }
   images: ListingImage[]
 }
 

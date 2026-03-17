@@ -2,16 +2,10 @@ import { PageWrapper } from '@/components/layout'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Skeleton, SkeletonListingCard } from '@/components/ui/skeleton'
+import { FeaturedSection } from '@/components/listings/featured-section'
+import { MakesSection } from '@/components/listings/makes-section'
 import Link from 'next/link'
-import {
-  Car,
-  Search,
-  Shield,
-  TrendingUp,
-  Star,
-  ArrowRight,
-} from 'lucide-react'
+import { Car, Search, Shield, TrendingUp, Star } from 'lucide-react'
 
 // ─── Feature cards ────────────────────────────────────────────────────────────
 
@@ -134,41 +128,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured listings placeholder */}
-      <section className="container mx-auto py-14">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h2 className="text-2xl font-bold text-surface-900">Featured Cars</h2>
-            <p className="text-surface-500 text-sm mt-1">Hand-picked deals this week</p>
-          </div>
-          <Button variant="outline" size="sm" asChild>
-            <Link href="/cars" className="gap-2">
-              View All <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
+      {/* Featured listings */}
+      <FeaturedSection />
 
-        {/* Skeleton placeholders — real listings in Phase 4 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <SkeletonListingCard key={i} />
-          ))}
-        </div>
-      </section>
-
-      {/* Popular makes placeholder */}
-      <section className="bg-surface-100 py-14">
-        <div className="container mx-auto">
-          <h2 className="text-2xl font-bold text-surface-900 mb-8 text-center">
-            Browse by Brand
-          </h2>
-          <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-8 gap-4">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <Skeleton key={i} className="h-20 rounded-xl" />
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Browse by brand */}
+      <MakesSection />
 
       {/* Features */}
       <section className="container mx-auto py-14">

@@ -21,8 +21,8 @@ const nextConfig: NextConfig = {
   // Strict mode for catching bugs early
   reactStrictMode: true,
 
-  // TypedRoutes for type-safe Link hrefs
-  typedRoutes: true,
+  // typedRoutes disabled during active dev — requires `next build` to regenerate route types.
+  // Re-enable before production deployment.
 }
 
 export default nextConfig

@@ -1,7 +1,12 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core'
 import { ThrottlerModule } from '@nestjs/throttler'
-import { PrismaModule } from './prisma/prisma.module'
+import { AppController } from './app.controller'
+import { HttpExceptionFilter } from './common/filters/http-exception.filter'
+import { JwtAuthGuard } from './common/guards/jwt-auth.guard'
+import { RolesGuard } from './common/guards/roles.guard'
+import { ResponseInterceptor } from './common/interceptors/response.interceptor'
 import { AuthModule } from './modules/auth/auth.module'
 import { UsersModule } from './modules/users/users.module'
 import { ListingsModule } from './modules/listings/listings.module'
@@ -10,7 +15,8 @@ import { SearchModule } from './modules/search/search.module'
 import { DealersModule } from './modules/dealers/dealers.module'
 import { BlogModule } from './modules/blog/blog.module'
 import { AdminModule } from './modules/admin/admin.module'
-import { AppController } from './app.controller'
+import { ReferenceModule } from './modules/reference/reference.module'
+import { PrismaModule } from './prisma/prisma.module'
 
 @Module({
   imports: [
@@ -46,7 +52,30 @@ import { AppController } from './app.controller'
     DealersModule,
     BlogModule,
     AdminModule,
+    ReferenceModule,
   ],
   controllers: [AppController],
+  providers: [
+    // ── Global Auth Guard (all routes require JWT unless @Public()) ───────────
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+    // ── Global Roles Guard ───────────────────────────────────────────────────
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+    // ── Global Exception Filter ──────────────────────────────────────────────
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+    // ── Global Response Interceptor ──────────────────────────────────────────
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ResponseInterceptor,
+    },
+  ],
 })
 export class AppModule {}

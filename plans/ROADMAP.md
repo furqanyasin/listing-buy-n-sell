@@ -48,72 +48,140 @@
 - [x] Toast notifications (Sonner, configured in Providers)
 - [x] Homepage shell (Hero, stats bar, featured skeleton, makes skeleton, features, CTA)
 
-## Phase 2 — Authentication
-- [ ] Register endpoint + DTO validation
-- [ ] Login endpoint + JWT tokens
-- [ ] Refresh token endpoint
-- [ ] Logout (revoke refresh token)
-- [ ] Email verification flow
-- [ ] Password reset flow
-- [ ] JWT Auth Guard
-- [ ] Role Guard (RBAC)
-- [ ] Current User decorator
-- [ ] Register page (UI)
-- [ ] Login page (UI)
-- [ ] Forgot password page (UI)
-- [ ] Auth store (Zustand)
-- [ ] Protected route wrapper
+## Phase 2 — Authentication ✅ COMPLETE
+- [x] Register endpoint + DTO validation
+- [x] Login endpoint + JWT tokens
+- [x] Refresh token endpoint
+- [x] Logout (revoke refresh token)
+- [~] Email verification flow (schema ready, not wired)
+- [x] Password reset flow (dev mode: token logged to console)
+- [x] JWT Auth Guard (global)
+- [x] Role Guard (RBAC, global)
+- [x] Current User decorator
+- [x] Register page (UI)
+- [x] Login page (UI)
+- [x] Forgot password page (UI)
+- [x] Reset password page (UI)
+- [x] Auth store (Zustand, persisted)
+- [x] Protected route middleware (Next.js middleware.ts)
+- [x] Axios interceptor (token attach + refresh + retry)
 
-## Phase 3 — Reference Data & Seed
-- [ ] Makes seed (Toyota, Honda, Suzuki, etc.)
-- [ ] Models seed per make
-- [ ] Cities of Pakistan seed
-- [ ] `/makes` API endpoint
-- [ ] `/makes/:id/models` endpoint
-- [ ] `/cities` endpoint
-- [ ] Admin seed account
+## Phase 3 — Reference Data & Seed ✅ COMPLETE
+- [x] Makes seed (18 makes: Toyota, Honda, Suzuki, KIA, Hyundai, Nissan, Mitsubishi, Daihatsu, Mercedes-Benz, BMW, Audi, Changan, Proton, MG, Haval, DFSK, FAW, United)
+- [x] Models seed per make (~100+ models total)
+- [x] Cities of Pakistan seed (30 cities with province + coordinates)
+- [x] `GET /reference/makes` endpoint (public)
+- [x] `GET /reference/makes/:id/models` endpoint (public)
+- [x] `GET /reference/cities` endpoint (public)
+- [x] Admin seed account (admin@pw-clone.com / Admin@123456)
+- [x] Frontend API functions (`lib/api/reference.ts`)
+- [x] Frontend TanStack Query hooks (`useMakes`, `useModelsByMake`, `useCities`)
 
-## Phase 4 — Vehicle Listings System
-- [ ] Create listing API (POST /listings)
-- [ ] Get listings API (GET /listings — paginated)
-- [ ] Get listing by ID
-- [ ] Update listing (PATCH)
-- [ ] Delete listing (soft delete)
-- [ ] My listings (GET /listings/user/me)
-- [ ] Listing status management
-- [ ] Multi-step listing form (UI)
-- [ ] Image upload integration
-- [ ] My listings dashboard page
+## Phase 4 — Vehicle Listings System ✅ COMPLETE
+- [x] Create listing API (`POST /listings`) — creates as PENDING
+- [x] Get listings API (`GET /listings`) — paginated, filtered, ACTIVE only
+- [x] Get featured listings (`GET /listings/featured`)
+- [x] Get listing by ID (`GET /listings/:id`) — increments view count
+- [x] My listings (`GET /listings/user/mine`)
+- [x] Update listing (`PATCH /listings/:id`) — owner only
+- [x] Delete listing (`DELETE /listings/:id`) — owner or admin
+- [x] Listing status management (`PATCH /listings/:id/status`) — admin/editor
+- [x] Admin all-listings view (`GET /listings/admin/all`)
+- [x] Full filter support: make, model, city, year range, price range, mileage, fuel type, transmission, body type, condition, isFeatured, sort, pagination
+- [x] `ListingCard` component (image, price in PKR Lakh/Crore, specs, badges)
+- [x] Filter sidebar component (`ListingFiltersPanel`) with cascading make→model selects
+- [x] `/cars` listings page (search bar, filter sidebar, grid, pagination)
+- [x] `/cars/[id]` detail page (image gallery, specs, seller card, phone CTA)
+- [x] `FeaturedSection` component (homepage, hides when empty)
+- [x] `MakesSection` component (homepage Browse by Brand)
+- [x] Homepage updated — real data replaces skeleton placeholders
 
-## Phase 5 — Search & Advanced Filtering
-- [ ] Elasticsearch setup
+## Phase 5 — Post Ad & Image Upload
+- [ ] Media module: `POST /media/upload` (Multer + Cloudinary)
+- [ ] Link images to listing after creation
+- [ ] Multi-step Post Ad form (Vehicle Info → Pricing & Location → Photos)
+- [ ] Form: react-hook-form + zod, cascading selects from reference hooks
+- [ ] `/post-ad` page (protected)
+- [ ] Dashboard: my listings management (edit/delete)
+
+## Phase 6 — Search & Advanced Filtering
+- [ ] Elasticsearch setup (or use existing Prisma full-text until Phase 6)
 - [ ] Index listings on create/update
-- [ ] Full-text search endpoint
-- [ ] Filter by: make, model, year, price, city, mileage, fuel, transmission, body type
-- [ ] Sort by: newest, price, mileage, year
-- [ ] Pagination with URL state
-- [ ] Search results page (UI)
-- [ ] Filter sidebar component
-- [ ] Active filters display
+- [ ] Dedicated search endpoint with relevance ranking
+- [ ] URL-synced filter state (searchParams)
+- [ ] Active filters chips display
 
-## Phase 6 — Homepage & Listing Cards
-- [ ] Hero search bar
-- [ ] Featured listings section
-- [ ] Popular makes section
-- [ ] Listing card component
-- [ ] Recent listings section
-- [ ] Homepage assembly
+## Phase 7 — Car Detail Page Enhancements
+- [ ] Image lightbox / fullscreen gallery
+- [ ] Related listings (same make/model)
+- [ ] WhatsApp deep link CTA
+- [ ] Share listing (URL copy, WhatsApp share)
+- [ ] SEO meta tags per listing (generateMetadata)
 
-## Phase 7 — Car Detail Page
-- [ ] Image gallery with lightbox
-- [ ] Full spec table
-- [ ] Seller info card
-- [ ] WhatsApp / call CTA
-- [ ] Contact seller form
-- [ ] Related listings
-- [ ] View count tracking
-- [ ] Share listing (URL copy, WhatsApp)
-- [ ] SEO meta tags per listing
+## Phase 8 — Dealer Profiles
+- [ ] Dealer registration flow
+- [ ] Dealer profile public page
+- [ ] Dealer inventory listing
+- [ ] Dealer verification badge (admin)
+
+## Phase 9 — User Dashboard
+- [ ] Dashboard home with stats
+- [ ] My ads management (edit/delete/renew)
+- [ ] Account settings page
+- [ ] Change password
+
+## Phase 10 — Favorites & Messaging
+- [ ] Save / unsave listings
+- [ ] Saved listings page
+- [ ] Start conversation (contact seller)
+- [ ] Conversations list page
+- [ ] Message thread view
+- [ ] Real-time updates (polling or WebSocket)
+
+## Phase 11 — Blog & Content
+- [ ] Blog listing page
+- [ ] Blog detail page
+- [ ] Blog categories
+- [ ] Blog CMS (admin create/edit)
+
+## Phase 12 — Reviews & Ratings
+- [ ] Leave review on seller/dealer
+- [ ] Star rating display
+- [ ] Reviews section on profiles
+
+## Phase 13 — Notifications
+- [ ] Notification bell (header)
+- [ ] Notification types
+- [ ] Mark as read
+- [ ] Backend notification creation service
+
+## Phase 14 — Admin Panel
+- [ ] Listings moderation (approve/reject)
+- [ ] User management (ban/verify)
+- [ ] Featured listings management
+- [ ] Blog management
+- [ ] Basic analytics dashboard
+
+## Phase 15 — Optimization & SEO
+- [ ] Dynamic OG tags
+- [ ] Sitemap.xml generation
+- [ ] Schema.org Vehicle markup
+- [ ] Redis caching for hot routes
+- [ ] Database index optimization
+- [ ] Lighthouse score 90+
+
+## Phase 16 — Production Deployment
+- [ ] Production Dockerfile (web + api)
+- [ ] Environment secrets management
+- [ ] SSL setup
+- [ ] Monitoring (Sentry)
+- [ ] DB backup strategy
+
+## Phase 17 — Testing & Launch
+- [ ] E2E test suite (Playwright)
+- [ ] Security audit
+- [ ] Load testing
+- [ ] Public launch
 
 ## Phase 8 — Dealer Profiles
 - [ ] Dealer registration flow

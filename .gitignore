@@ -45,3 +45,15 @@ prisma/migrations/*.lock
 
 # Uploads (local dev)
 uploads/
+
+# TypeScript incremental build info
+*.tsbuildinfo
+
+# Compiled output from packages/types (source files only, not dist)
+packages/types/src/*.js
+packages/types/src/*.js.map
+packages/types/src/*.d.ts
+
+# Claude Code local session data
+.claude/
+memory/
