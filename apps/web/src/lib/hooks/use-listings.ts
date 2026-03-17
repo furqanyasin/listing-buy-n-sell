@@ -41,6 +41,16 @@ export function useMyListings() {
   })
 }
 
+export function useRelatedListings(makeId: string, modelId: string, excludeId: string) {
+  return useQuery({
+    queryKey: ['listings', 'related', makeId, modelId, excludeId],
+    queryFn: () => getListingsApi({ makeId, modelId, limit: 5, page: 1 }),
+    enabled: !!makeId && !!modelId,
+    staleTime: 1000 * 60 * 5,
+    select: (data) => data.data.filter((l) => l.id !== excludeId).slice(0, 4),
+  })
+}
+
 export function useDeleteListing() {
   const queryClient = useQueryClient()
 

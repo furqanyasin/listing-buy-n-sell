@@ -119,12 +119,14 @@
 - [x] Pagination page number synced to URL (`?page=N`)
 - [x] Elasticsearch deferred — Prisma full-text search sufficient at current scale
 
-## Phase 7 — Car Detail Page Enhancements
-- [ ] Image lightbox / fullscreen gallery
-- [ ] Related listings (same make/model)
-- [ ] WhatsApp deep link CTA
-- [ ] Share listing (URL copy, WhatsApp share)
-- [ ] SEO meta tags per listing (generateMetadata)
+## Phase 7 — Car Detail Page Enhancements ✅ COMPLETE
+- [x] Image lightbox — fullscreen overlay, keyboard nav (← → Esc), dot indicators, click-to-open
+- [x] Related listings — same make+model, max 4 cards, excludes current listing, shown at page bottom
+- [x] `useRelatedListings(makeId, modelId, excludeId)` hook
+- [x] WhatsApp deep link — `https://wa.me/{number}?text=...` pre-filled with title + URL; PK number formatter (03XX → 923XX)
+- [x] Share button — Web Share API with `navigator.clipboard` fallback (copies URL)
+- [x] SEO metadata — `generateMetadata` in Server Component, fetches listing data server-side, sets title/description/og:image/twitter:card
+- [x] Page split into Server Component (`page.tsx`) + Client Component (`listing-detail-client.tsx`)
 
 ## Phase 8 — Dealer Profiles
 - [ ] Dealer registration flow
