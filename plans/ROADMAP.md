@@ -20,26 +20,33 @@
 - [x] `.env.example` with all variables
 - [x] Documentation structure
 
-## Phase 1 — Design System
-- [ ] Color tokens & CSS variables
-- [ ] Typography scale
-- [ ] Button component (variants: primary, secondary, ghost, destructive)
-- [ ] Input component
-- [ ] Textarea component
-- [ ] Select component
-- [ ] Card component
-- [ ] Badge component
-- [ ] Avatar component
-- [ ] Skeleton loaders
-- [ ] Modal / Dialog
-- [ ] Dropdown Menu
-- [ ] Tabs component
-- [ ] Pagination component
-- [ ] Spinner / Loading states
-- [ ] Global Header (desktop + mobile)
-- [ ] Global Footer
-- [ ] Layout wrapper
-- [ ] Toast notifications (via sonner)
+## Phase 1 — Design System ✅ COMPLETE
+- [x] Color tokens & CSS variables (brand-*, surface-* in tailwind.config.ts + globals.css)
+- [x] Typography scale (Inter font, heading hierarchy)
+- [x] Button component (6 variants: default/secondary/outline/ghost/destructive/link, 4 sizes, asChild, isLoading)
+- [x] Input component (leftIcon, rightIcon, error state)
+- [x] Textarea component (error state, resize-y)
+- [x] Select component (full Radix, checkmark, error state)
+- [x] Label component (required asterisk)
+- [x] Checkbox component + CheckboxWithLabel
+- [x] Card component family (Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription)
+- [x] Badge component (6 variants: default/secondary/success/destructive/warning/outline)
+- [x] Avatar component (4 sizes, Radix, fallback initials)
+- [x] Skeleton loaders (Skeleton, SkeletonCard, SkeletonListingCard)
+- [x] Modal / Dialog (Radix, backdrop blur, slide animation, X button)
+- [x] Dropdown Menu (full Radix family, sub-menus, radio/checkbox items)
+- [x] Tabs component (pill style, Radix)
+- [x] Pagination component (smart range, PaginationInfo)
+- [x] Spinner / Loading states (3 variants, 3 sizes, SVG animate-spin)
+- [x] Separator (horizontal + vertical)
+- [x] Tooltip (dark bg, Radix, Portal)
+- [x] ScrollArea (Radix, custom scrollbar)
+- [x] Global Header (sticky, scroll shadow, desktop nav, mobile hamburger slide-out)
+- [x] Global Footer (4-column grid, social links, app download CTA, bottom bar)
+- [x] PageWrapper layout (Header + Footer + main, noPadding/contained variants)
+- [x] Auth store skeleton (Zustand, persisted)
+- [x] Toast notifications (Sonner, configured in Providers)
+- [x] Homepage shell (Hero, stats bar, featured skeleton, makes skeleton, features, CTA)
 
 ## Phase 2 — Authentication
 - [ ] Register endpoint + DTO validation
