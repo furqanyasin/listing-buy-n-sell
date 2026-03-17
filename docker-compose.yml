@@ -1,0 +1,88 @@
+version: '3.9'
+
+services:
+  # ── PostgreSQL ────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: pw_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: pw_user
+      POSTGRES_PASSWORD: pw_password
+      POSTGRES_DB: pw_clone_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U pw_user -d pw_clone_db']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── pgAdmin (DB GUI) ──────────────────────────────────────────
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pw_pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pw-clone.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - '5050:80'
+    depends_on:
+      - postgres
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+  # ── Redis ─────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: pw_redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis Commander (Redis GUI) ───────────────────────────────
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: pw_redis_commander
+    restart: unless-stopped
+    environment:
+      REDIS_HOSTS: local:redis:6379
+    ports:
+      - '8081:8081'
+    depends_on:
+      - redis
+
+  # ── Elasticsearch (Phase 5 — uncomment when needed) ───────────
+  # elasticsearch:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:8.15.0
+  #   container_name: pw_elasticsearch
+  #   restart: unless-stopped
+  #   environment:
+  #     - discovery.type=single-node
+  #     - xpack.security.enabled=false
+  #     - ES_JAVA_OPTS=-Xms512m -Xmx512m
+  #   ports:
+  #     - '9200:9200'
+  #   volumes:
+  #     - es_data:/usr/share/elasticsearch/data
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+  redis_data:
+  # es_data:
+
+networks:
+  default:
+    name: pw_network

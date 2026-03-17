@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "skills": {
+    "clone-website": {
+      "source": "julianromli/ai-skills",
+      "sourceType": "github",
+      "computedHash": "bb2d4973a1ac7eaba1f3b831a8ffd5b405c3a61920aaec10cf7c92314b80af01"
+    },
+    "ui-cloner": {
+      "source": "ragnar-pwninskjold/tech-snacks",
+      "sourceType": "github",
+      "computedHash": "96b406bc1da215e8f972b4c497173db45ed0f2f61eb4391dc4e7808c66589ac8"
+    },
+    "ui-cloner-brand-interview": {
+      "source": "ragnar-pwninskjold/tech-snacks",
+      "sourceType": "github",
+      "computedHash": "a7f7880bc96714b729dad897c1b6d9d8f82dbbd2219358ae60b0fb5ede413666"
+    },
+    "ui-cloner-forensic-audit": {
+      "source": "ragnar-pwninskjold/tech-snacks",
+      "sourceType": "github",
+      "computedHash": "16dbb1ab27c0e0380c9881649f2da5f77f0ef01f74ff451bdab57ca8434b5a5a"
+    },
+    "ui-cloner-iterator": {
+      "source": "ragnar-pwninskjold/tech-snacks",
+      "sourceType": "github",
+      "computedHash": "8c9e95ea9314dea602d5ed08a6321672094529da9215e5ba85220e8b2487c826"
+    },
+    "ui-cloner-quality-check": {
+      "source": "ragnar-pwninskjold/tech-snacks",
+      "sourceType": "github",
+      "computedHash": "813e2d01cafaa548a6b21d36d7e8f979f8758424354e32ee3f8a2d267eb6bb1c"
+    },
+    "ui-cloner-synthesis": {
+      "source": "ragnar-pwninskjold/tech-snacks",
+      "sourceType": "github",
+      "computedHash": "a486f69d3a2975a94b6b0f229749273c2e7f735e7c407d0c5ab586f2b70a39de"
+    },
+    "website-cloner": {
+      "source": "horuz-ai/claude-plugins",
+      "sourceType": "github",
+      "computedHash": "30815129daa2f10e80dde6d5f670536a557733a4dad06c23e4af00616c1e0564"
+    }
+  }
+}
