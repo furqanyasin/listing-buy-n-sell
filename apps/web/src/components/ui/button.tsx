@@ -67,8 +67,22 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const Comp = asChild ? Slot : 'button'
 
+    // When asChild, Slot must receive exactly one child element — skip the
+    // loading spinner wrapper and pass children directly.
+    if (asChild) {
+      return (
+        <Slot
+          ref={ref}
+          className={cn(buttonVariants({ variant, size, className }))}
+          {...props}
+        >
+          {children}
+        </Slot>
+      )
+    }
+
     return (
-      <Comp
+      <button
         ref={ref}
         className={cn(buttonVariants({ variant, size, className }))}
         disabled={disabled || isLoading}
@@ -84,11 +98,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           >
             <circle
               className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
+              cx="12" cy="12" r="10"
+              stroke="currentColor" strokeWidth="4"
             />
             <path
               className="opacity-75"
@@ -98,7 +109,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           </svg>
         )}
         {children}
-      </Comp>
+      </button>
     )
   },
 )

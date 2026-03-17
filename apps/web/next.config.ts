@@ -21,10 +21,8 @@ const nextConfig: NextConfig = {
   // Strict mode for catching bugs early
   reactStrictMode: true,
 
-  // Experimental features
-  experimental: {
-    typedRoutes: true,
-  },
+  // TypedRoutes for type-safe Link hrefs
+  typedRoutes: true,
 }
 
 export default nextConfig
