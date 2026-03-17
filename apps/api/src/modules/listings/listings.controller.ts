@@ -75,6 +75,14 @@ export class ListingsController {
     return this.listingsService.findMine(user.id)
   }
 
+  @Get('user/mine/:id')
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "Get one of the current user's listings by ID (any status, for edit form)" })
+  @ApiParam({ name: 'id', description: 'Listing ID' })
+  findMineById(@Param('id') id: string, @CurrentUser() user: { id: string }) {
+    return this.listingsService.findMineById(id, user.id)
+  }
+
   @Post(':id/images')
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Attach uploaded images to a listing (owner only)' })

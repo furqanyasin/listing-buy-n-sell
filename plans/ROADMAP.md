@@ -144,11 +144,18 @@
 - [x] `/dealers/[slug]` — public dealer profile (cover, logo, contact card, active inventory grid)
 - [x] `/dealers/register` — dealer registration form (react-hook-form + zod)
 
-## Phase 9 — User Dashboard
-- [ ] Dashboard home with stats
-- [ ] My ads management (edit/delete/renew)
-- [ ] Account settings page
-- [ ] Change password
+## Phase 9 — User Dashboard ✅ COMPLETE
+- [x] `viewsCount` added to `LIST_SELECT` — `findMine` now returns total view counts
+- [x] Dashboard stats: real total views summed from listings (not hardcoded)
+- [x] Edit button per listing in dashboard → `/dashboard/listings/:id/edit`
+- [x] Edit listing page — full prefilled form (vehicle info + pricing), any listing status
+- [x] `GET /listings/user/mine/:id` — owner can fetch their own listing (any status) for edit form
+- [x] Settings page `/dashboard/settings` — profile card with avatar upload, name, phone
+- [x] `PATCH /auth/change-password` — verify current password, update with bcrypt hash
+- [x] Change password form with current/new/confirm fields + Zod refine validation
+- [x] `useUpdateProfile`, `useChangePassword`, `useProfile` hooks
+- [x] Auth store synced after profile update (header shows updated name immediately)
+- [x] `useMyListing(id)`, `useUpdateListing(id)` hooks added
 
 ## Phase 10 — Favorites & Messaging
 - [ ] Save / unsave listings

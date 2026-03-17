@@ -7,6 +7,7 @@ import type {
   PaginatedResponse,
 } from '@pw-clone/types'
 
+
 interface ApiResponse<T> {
   success: boolean
   data: T
@@ -55,4 +56,9 @@ export async function updateListingApi(
 
 export async function deleteListingApi(id: string): Promise<void> {
   await apiClient.delete(`/listings/${id}`)
+}
+
+export async function getMyListingApi(id: string): Promise<Listing> {
+  const { data } = await apiClient.get<ApiResponse<Listing>>(`/listings/user/mine/${id}`)
+  return data.data
 }

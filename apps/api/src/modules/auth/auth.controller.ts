@@ -3,6 +3,7 @@ import {
   Controller,
   HttpCode,
   HttpStatus,
+  Patch,
   Post,
   UseGuards,
 } from '@nestjs/common'
@@ -15,6 +16,7 @@ import { CurrentUser } from '../../common/decorators/current-user.decorator'
 import { Public } from '../../common/decorators/public.decorator'
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard'
 import { AuthService } from './auth.service'
+import { ChangePasswordDto } from './dto/change-password.dto'
 import { ForgotPasswordDto } from './dto/forgot-password.dto'
 import { LoginDto } from './dto/login.dto'
 import { RefreshTokenDto } from './dto/refresh-token.dto'
@@ -105,6 +107,19 @@ export class AuthController {
       success: true,
       message: result.message,
     }
+  }
+
+  @Patch('change-password')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Change password for the authenticated user' })
+  async changePassword(
+    @CurrentUser() user: { id: string },
+    @Body() dto: ChangePasswordDto,
+  ) {
+    const result = await this.authService.changePassword(user.id, dto)
+    return { success: true, message: result.message }
   }
 
   // ─── Private Helpers ───────────────────────────────────────────────────────

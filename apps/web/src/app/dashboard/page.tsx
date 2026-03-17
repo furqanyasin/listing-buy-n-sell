@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Car, Heart, Eye, Plus, Trash2, ExternalLink } from 'lucide-react'
+import { Car, Heart, Eye, Plus, Trash2, ExternalLink, Pencil, Settings } from 'lucide-react'
 import { PageWrapper } from '@/components/layout'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -69,8 +69,13 @@ function ListingRow({
 
       {/* Actions */}
       <div className="flex items-center gap-2 shrink-0">
+        <Button variant="ghost" size="icon" asChild title="Edit listing">
+          <Link href={`/dashboard/listings/${listing.id}/edit`}>
+            <Pencil className="h-4 w-4" />
+          </Link>
+        </Button>
         {listing.status === 'ACTIVE' && (
-          <Button variant="ghost" size="icon" asChild>
+          <Button variant="ghost" size="icon" asChild title="View live listing">
             <Link href={`/cars/${listing.id}`}>
               <ExternalLink className="h-4 w-4" />
             </Link>
@@ -81,6 +86,7 @@ function ListingRow({
           size="icon"
           className="text-red-500 hover:text-red-600 hover:bg-red-50"
           onClick={() => onDelete(listing.id)}
+          title="Delete listing"
         >
           <Trash2 className="h-4 w-4" />
         </Button>
@@ -96,7 +102,7 @@ export default function DashboardPage() {
   const deleteMutation = useDeleteListing()
 
   const activeCount = listings.filter((l) => l.status === 'ACTIVE').length
-  const totalViews = 0 // Computed from full listing data — available in Phase 9
+  const totalViews = listings.reduce((sum, l) => sum + (l.viewsCount ?? 0), 0)
 
   function handleDelete(id: string) {
     if (!confirm('Are you sure you want to delete this listing?')) return
@@ -117,12 +123,19 @@ export default function DashboardPage() {
           <h1 className="text-2xl font-bold text-surface-900">My Dashboard</h1>
           <p className="text-surface-500 mt-1">Manage your car listings and activity.</p>
         </div>
-        <Button asChild>
-          <Link href="/post-ad">
-            <Plus className="h-4 w-4" />
-            Post Ad
-          </Link>
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="icon" asChild title="Account settings">
+            <Link href="/dashboard/settings">
+              <Settings className="h-4 w-4" />
+            </Link>
+          </Button>
+          <Button asChild>
+            <Link href="/post-ad">
+              <Plus className="h-4 w-4" />
+              Post Ad
+            </Link>
+          </Button>
+        </div>
       </div>
 
       {/* Stats */}

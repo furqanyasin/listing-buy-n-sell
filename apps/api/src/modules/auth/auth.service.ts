@@ -4,6 +4,7 @@ import {
   ConflictException,
   Injectable,
   Logger,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
@@ -12,6 +13,7 @@ import * as bcrypt from 'bcrypt'
 import { AuthTokens, JwtPayload } from '@pw-clone/types'
 import { PrismaService } from '../../prisma/prisma.service'
 import { UsersService } from '../users/users.service'
+import { ChangePasswordDto } from './dto/change-password.dto'
 import { ForgotPasswordDto } from './dto/forgot-password.dto'
 import { LoginDto } from './dto/login.dto'
 import { RegisterDto } from './dto/register.dto'
@@ -205,6 +207,19 @@ export class AuthService {
     await this.prisma.refreshToken.deleteMany({ where: { userId: matchedUserId } })
 
     return { message: 'Password has been reset successfully' }
+  }
+
+  async changePassword(userId: string, dto: ChangePasswordDto): Promise<{ message: string }> {
+    const user = await this.usersService.findById(userId)
+    if (!user) throw new NotFoundException('User not found')
+
+    const valid = await bcrypt.compare(dto.currentPassword, user.passwordHash)
+    if (!valid) throw new BadRequestException('Current password is incorrect')
+
+    const hashed = await bcrypt.hash(dto.newPassword, 12)
+    await this.usersService.updatePassword(userId, hashed)
+
+    return { message: 'Password changed successfully' }
   }
 
   // ─── Private Helpers ─────────────────────────────────────────────────────────

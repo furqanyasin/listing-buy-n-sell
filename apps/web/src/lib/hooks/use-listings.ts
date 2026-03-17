@@ -8,8 +8,11 @@ import {
   getFeaturedListingsApi,
   getListingApi,
   getMyListingsApi,
+  getMyListingApi,
+  updateListingApi,
   deleteListingApi,
 } from '@/lib/api/listings'
+import type { CreateListingRequest } from '@pw-clone/types'
 
 export function useListings(filters: ListingFilters = {}) {
   return useQuery<PaginatedResponse<ListingCard>>({
@@ -48,6 +51,27 @@ export function useRelatedListings(makeId: string, modelId: string, excludeId: s
     enabled: !!makeId && !!modelId,
     staleTime: 1000 * 60 * 5,
     select: (data) => data.data.filter((l) => l.id !== excludeId).slice(0, 4),
+  })
+}
+
+export function useMyListing(id: string) {
+  return useQuery({
+    queryKey: ['listings', 'mine', id],
+    queryFn: () => getMyListingApi(id),
+    enabled: !!id,
+  })
+}
+
+export function useUpdateListing(id: string) {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (payload: Partial<CreateListingRequest>) => updateListingApi(id, payload),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ['listings'] })
+      toast.success('Listing updated')
+    },
+    onError: () => toast.error('Failed to update listing'),
   })
 }
 

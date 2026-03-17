@@ -55,3 +55,14 @@ export async function getMeApi(): Promise<User> {
   const { data } = await apiClient.get<{ success: boolean; data: User }>('/users/me')
   return data.data
 }
+
+export async function changePasswordApi(
+  currentPassword: string,
+  newPassword: string,
+): Promise<string> {
+  const { data } = await apiClient.patch<{ success: boolean; message: string }>(
+    '/auth/change-password',
+    { currentPassword, newPassword },
+  )
+  return data.message
+}

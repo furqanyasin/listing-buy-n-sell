@@ -70,6 +70,7 @@ export interface ListingCard
     | 'status'
     | 'isFeatured'
     | 'locationText'
+    | 'viewsCount'
     | 'createdAt'
   > {
   make: Make

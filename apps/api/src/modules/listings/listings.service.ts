@@ -24,6 +24,7 @@ const LIST_SELECT = {
   status: true,
   isFeatured: true,
   locationText: true,
+  viewsCount: true,
   createdAt: true,
   make: { select: { id: true, name: true, slug: true, logoUrl: true } },
   model: { select: { id: true, name: true, slug: true } },
@@ -34,6 +35,7 @@ const LIST_SELECT = {
     take: 1,
   },
 } satisfies Prisma.ListingSelect
+
 
 // Full select for detail view
 const DETAIL_SELECT = {
@@ -190,6 +192,19 @@ export class ListingsService {
       orderBy: { createdAt: 'desc' },
       select: LIST_SELECT,
     })
+  }
+
+  // ─── Find Mine By Id (owner, any status, for edit form) ─────────────────────
+
+  async findMineById(id: string, userId: string) {
+    const raw = await this.prisma.listing.findUnique({
+      where: { id },
+      select: { userId: true, ...DETAIL_SELECT },
+    })
+    if (!raw) throw new NotFoundException('Listing not found')
+    if (raw.userId !== userId) throw new ForbiddenException('Not your listing')
+    const { userId: _uid, ...rest } = raw
+    return rest
   }
 
   // ─── Update (owner only) ──────────────────────────────────────────────────────
