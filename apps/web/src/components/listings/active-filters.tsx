@@ -27,7 +27,7 @@ const BODY_LABELS: Record<string, string> = {
   PRESS_BRAKE: 'Press Brake',
   WATERJET: 'Waterjet',
   PLASMA_CUTTER: 'Plasma Cutter',
-  '3D_PRINTER': '3D Printer',
+  'PRINTER_3D': '3D Printer',
   BORING_MILL: 'Boring Mill',
   OTHER: 'Other',
 }

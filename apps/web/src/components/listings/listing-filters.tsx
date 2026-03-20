@@ -35,7 +35,7 @@ const BODY_OPTIONS = [
   { value: 'PRESS_BRAKE', label: 'Press Brake' },
   { value: 'WATERJET', label: 'Waterjet' },
   { value: 'PLASMA_CUTTER', label: 'Plasma Cutter' },
-  { value: '3D_PRINTER', label: '3D Printer' },
+  { value: 'PRINTER_3D', label: '3D Printer' },
 ]
 
 const SORT_OPTIONS = [

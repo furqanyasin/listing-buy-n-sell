@@ -12,7 +12,7 @@ export const listingStep1Schema = z.object({
     .max(CURRENT_YEAR + 1, 'Year cannot be in the future'),
   condition: z.enum(['NEW', 'USED'], { required_error: 'Condition is required' }),
   bodyType: z.enum(
-    ['CNC_MILL', 'CNC_LATHE', 'LASER_CUTTER', 'CNC_ROUTER', 'PRESS_BRAKE', 'WATERJET', 'PLASMA_CUTTER', '3D_PRINTER'],
+    ['CNC_MILL', 'CNC_LATHE', 'LASER_CUTTER', 'CNC_ROUTER', 'PRESS_BRAKE', 'WATERJET', 'PLASMA_CUTTER', 'PRINTER_3D'],
     { required_error: 'Machine type is required' },
   ),
   fuelType: z.enum(['ELECTRIC', 'HYDRAULIC', 'PNEUMATIC', 'DIESEL', 'MANUAL'], {

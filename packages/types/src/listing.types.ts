@@ -13,7 +13,7 @@ export type BodyType =
   | 'PRESS_BRAKE'
   | 'WATERJET'
   | 'PLASMA_CUTTER'
-  | '3D_PRINTER'
+  | 'PRINTER_3D'
 export type VehicleCondition = 'NEW' | 'USED'
 export type ListingStatus = 'DRAFT' | 'PENDING' | 'ACTIVE' | 'SOLD' | 'EXPIRED' | 'REJECTED'
 
