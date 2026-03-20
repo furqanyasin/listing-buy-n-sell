@@ -13,7 +13,7 @@ import type { Dealer } from '@pw-clone/types'
 function DealerCard({ dealer }: { dealer: Dealer }) {
   return (
     <Link
-      href={`/dealers/${dealer.slug}`}
+      href={`/suppliers/${dealer.slug}`}
       className="block rounded-xl border border-surface-200 bg-white overflow-hidden shadow-card hover:shadow-card-hover transition-shadow"
     >
       {/* Cover / banner */}
@@ -76,7 +76,7 @@ export default function DealersPage() {
           <p className="text-surface-500 mt-1">Browse verified suppliers across Pakistan.</p>
         </div>
         <Button asChild>
-          <Link href="/dealers/register">
+          <Link href="/suppliers/register">
             <Plus className="h-4 w-4" />
             Become a Supplier
           </Link>
@@ -94,7 +94,7 @@ export default function DealersPage() {
           <Cog className="h-12 w-12 mx-auto mb-3 opacity-30" />
           <p className="font-medium">No suppliers yet</p>
           <p className="text-sm mt-1">
-            <Link href="/dealers/register" className="text-brand-500 hover:underline">
+            <Link href="/suppliers/register" className="text-brand-500 hover:underline">
               Register as a supplier
             </Link>{' '}
             to get listed here.

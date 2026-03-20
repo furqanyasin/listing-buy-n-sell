@@ -98,7 +98,7 @@ export default function MessagesPage() {
           <p className="font-medium">No conversations yet</p>
           <p className="text-sm mt-1">Start a conversation from any car listing page.</p>
           <Button asChild className="mt-6">
-            <Link href="/cars">Browse Cars</Link>
+            <Link href="/machines">Browse Machines</Link>
           </Button>
         </div>
       ) : (

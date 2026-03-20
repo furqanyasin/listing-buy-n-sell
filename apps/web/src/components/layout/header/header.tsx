@@ -115,7 +115,7 @@ export function Header() {
                 aria-label="Search"
                 asChild
               >
-                <Link href="/cars">
+                <Link href="/machines">
                   <Search className="h-5 w-5" />
                 </Link>
               </Button>
@@ -142,7 +142,7 @@ export function Header() {
 
                   {/* Post Ad */}
                   <Button size="sm" className="hidden sm:inline-flex gap-1.5" asChild>
-                    <Link href="/post-ad">
+                    <Link href="/list-machine">
                       <Plus className="h-4 w-4" />
                       List Machine
                     </Link>
@@ -167,7 +167,7 @@ export function Header() {
                   </Button>
                   {/* Mobile: Post Ad shortcut */}
                   <Button size="sm" className="lg:hidden gap-1.5" asChild>
-                    <Link href="/post-ad">
+                    <Link href="/list-machine">
                       <Plus className="h-4 w-4" />
                       <span className="hidden xs:inline">Post Ad</span>
                     </Link>

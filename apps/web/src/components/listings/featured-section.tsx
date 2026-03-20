@@ -21,7 +21,7 @@ export function FeaturedSection() {
           <p className="text-surface-500 text-sm mt-1">Hand-picked equipment this week</p>
         </div>
         <Button variant="outline" size="sm" asChild>
-          <Link href="/cars?isFeatured=true" className="gap-2">
+          <Link href="/machines?isFeatured=true" className="gap-2">
             View All <ArrowRight className="h-4 w-4" />
           </Link>
         </Button>

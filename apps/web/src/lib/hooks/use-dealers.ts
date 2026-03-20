@@ -45,7 +45,7 @@ export function useRegisterDealer() {
     onSuccess: (dealer) => {
       void queryClient.invalidateQueries({ queryKey: ['dealers'] })
       toast.success('Dealer profile created successfully!')
-      router.push(`/dealers/${dealer.slug}`)
+      router.push(`/suppliers/${dealer.slug}`)
     },
     onError: (error: { response?: { data?: { message?: string } } }) => {
       const msg = error.response?.data?.message ?? 'Failed to create dealer profile.'

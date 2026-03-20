@@ -86,7 +86,7 @@ function CarsContent() {
   const pushFilters = useCallback(
     (newFilters: ListingFilters) => {
       const qs = filtersToParams(newFilters)
-      router.replace(qs ? `/cars?${qs}` : '/cars', { scroll: false })
+      router.replace(qs ? `/machines?${qs}` : '/machines', { scroll: false })
     },
     [router],
   )

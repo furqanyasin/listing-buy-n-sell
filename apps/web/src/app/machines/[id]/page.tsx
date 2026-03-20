@@ -81,7 +81,7 @@ export default async function ListingDetailPage({ params }: Props) {
           priceCurrency: 'PKR',
           price: listing.price,
           availability: 'https://schema.org/InStock',
-          url: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cncmachinebazaar.com'}/cars/${id}`,
+          url: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cncmachinebazaar.com'}/machines/${id}`,
         },
         image: listing.images?.[0]?.url,
       }

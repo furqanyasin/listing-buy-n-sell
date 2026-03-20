@@ -142,7 +142,7 @@ export default function DealerProfilePage() {
           <h1 className="text-xl font-semibold text-surface-700">Supplier not found</h1>
           <p className="text-surface-500 mt-2 mb-6">This supplier may no longer be active.</p>
           <Button asChild>
-            <Link href="/dealers">View all suppliers</Link>
+            <Link href="/suppliers">View all suppliers</Link>
           </Button>
         </div>
       </PageWrapper>
@@ -160,7 +160,7 @@ export default function DealerProfilePage() {
       <div className="max-w-5xl mx-auto">
         {/* Breadcrumb */}
         <nav className="text-sm text-surface-500 mb-4 flex items-center gap-1.5">
-          <Link href="/dealers" className="hover:text-brand-600">Suppliers</Link>
+          <Link href="/suppliers" className="hover:text-brand-600">Suppliers</Link>
           <span>/</span>
           <span className="text-surface-800 font-medium">{dealer.name}</span>
         </nav>

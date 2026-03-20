@@ -18,16 +18,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static routes
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: BASE_URL, changeFrequency: 'daily', priority: 1 },
-    { url: `${BASE_URL}/cars`, changeFrequency: 'hourly', priority: 0.9 },
-    { url: `${BASE_URL}/dealers`, changeFrequency: 'daily', priority: 0.8 },
+    { url: `${BASE_URL}/machines`, changeFrequency: 'hourly', priority: 0.9 },
+    { url: `${BASE_URL}/suppliers`, changeFrequency: 'daily', priority: 0.8 },
     { url: `${BASE_URL}/blog`, changeFrequency: 'daily', priority: 0.7 },
-    { url: `${BASE_URL}/post-ad`, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE_URL}/list-machine`, changeFrequency: 'monthly', priority: 0.5 },
   ]
 
   // Dynamic: listings
   const listings = await fetchJson<{ data: { id: string; updatedAt: string }[] }>('/listings?limit=1000')
   const listingRoutes: MetadataRoute.Sitemap = (listings?.data ?? []).map((l) => ({
-    url: `${BASE_URL}/cars/${l.id}`,
+    url: `${BASE_URL}/machines/${l.id}`,
     lastModified: new Date(l.updatedAt),
     changeFrequency: 'weekly',
     priority: 0.8,
@@ -36,7 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Dynamic: suppliers
   const dealers = await fetchJson<{ slug: string; updatedAt: string }[]>('/dealers')
   const dealerRoutes: MetadataRoute.Sitemap = (dealers ?? []).map((d) => ({
-    url: `${BASE_URL}/dealers/${d.slug}`,
+    url: `${BASE_URL}/suppliers/${d.slug}`,
     changeFrequency: 'weekly',
     priority: 0.7,
   }))

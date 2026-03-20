@@ -19,7 +19,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
               CNC Machine Bazaar
             </span>
           </Link>
-          <Link href="/cars" className="text-sm text-surface-500 hover:text-surface-900 transition-colors">
+          <Link href="/machines" className="text-sm text-surface-500 hover:text-surface-900 transition-colors">
             Browse Machines
           </Link>
         </div>

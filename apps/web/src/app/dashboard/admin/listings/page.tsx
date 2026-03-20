@@ -82,7 +82,7 @@ export default function AdminListingsPage() {
                           by {listing.seller?.name} ({listing.seller?.email})
                         </p>
                       </div>
-                      <Link href={`/cars/${listing.id}`} target="_blank">
+                      <Link href={`/machines/${listing.id}`} target="_blank">
                         <ExternalLink className="h-4 w-4 text-surface-400 hover:text-brand-600" />
                       </Link>
                     </div>

@@ -130,7 +130,7 @@ export default function MessageThreadPage() {
 
           {/* Listing preview */}
           <Link
-            href={`/cars/${conv.listing.id}`}
+            href={`/machines/${conv.listing.id}`}
             className="flex items-center gap-3 flex-1 min-w-0 group"
           >
             <div className="relative w-12 h-9 rounded-lg overflow-hidden bg-surface-100 shrink-0">

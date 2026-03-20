@@ -37,7 +37,7 @@ export function ListingCard({ listing, className }: ListingCardProps) {
 
   return (
     <Link
-      href={`/cars/${listing.id}`}
+      href={`/machines/${listing.id}`}
       className={cn(
         'group block rounded-xl border border-surface-200 bg-white overflow-hidden',
         'shadow-card hover:shadow-card-hover transition-shadow duration-200',

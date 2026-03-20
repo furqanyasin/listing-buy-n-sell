@@ -46,7 +46,7 @@ function HeroSearchBar() {
         />
       </div>
       <Button size="lg" className="sm:px-8 rounded-xl gap-2" asChild>
-        <Link href="/cars">
+        <Link href="/machines">
           <Search className="h-4 w-4" />
           Search Machines
         </Link>
@@ -95,7 +95,7 @@ export default function HomePage() {
                 (machine, i) => (
                   <span key={machine}>
                     <Link
-                      href={`/cars?q=${encodeURIComponent(machine)}`}
+                      href={`/machines?q=${encodeURIComponent(machine)}`}
                       className="text-surface-300 hover:text-white underline underline-offset-2 transition-colors"
                     >
                       {machine}
@@ -173,7 +173,7 @@ export default function HomePage() {
               className="bg-white text-brand-600 hover:bg-brand-50"
               asChild
             >
-              <Link href="/post-ad">List Your Machine</Link>
+              <Link href="/list-machine">List Your Machine</Link>
             </Button>
             <Button
               size="lg"
@@ -181,7 +181,7 @@ export default function HomePage() {
               className="border-white text-white hover:bg-white/10"
               asChild
             >
-              <Link href="/cars">Browse Machines</Link>
+              <Link href="/machines">Browse Machines</Link>
             </Button>
           </div>
         </div>

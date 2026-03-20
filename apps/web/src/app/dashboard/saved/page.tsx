@@ -19,7 +19,7 @@ export default function SavedPage() {
           <p className="text-surface-500 mt-1">Machines you&apos;ve saved for later.</p>
         </div>
         <Button variant="outline" asChild>
-          <Link href="/cars">Browse Machines</Link>
+          <Link href="/machines">Browse Machines</Link>
         </Button>
       </div>
 
@@ -39,7 +39,7 @@ export default function SavedPage() {
             {' '}on any listing to save it here.
           </p>
           <Button asChild className="mt-6">
-            <Link href="/cars">
+            <Link href="/machines">
               <Cog className="h-4 w-4" />
               Browse Machines
             </Link>

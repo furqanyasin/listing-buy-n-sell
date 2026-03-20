@@ -47,7 +47,7 @@ export default function AdminDashboardPage() {
       title: 'Total Suppliers',
       value: stats?.totalDealers,
       icon: FileText,
-      href: '/dealers',
+      href: '/suppliers',
     },
   ]
 

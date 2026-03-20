@@ -76,7 +76,7 @@ function ListingRow({
         </Button>
         {listing.status === 'ACTIVE' && (
           <Button variant="ghost" size="icon" asChild title="View live listing">
-            <Link href={`/cars/${listing.id}`}>
+            <Link href={`/machines/${listing.id}`}>
               <ExternalLink className="h-4 w-4" />
             </Link>
           </Button>
@@ -129,7 +129,7 @@ export default function DashboardPage() {
             </Link>
           </Button>
           <Button asChild>
-            <Link href="/post-ad">
+            <Link href="/list-machine">
               <Plus className="h-4 w-4" />
               List Machine
             </Link>
@@ -185,7 +185,7 @@ export default function DashboardPage() {
               <Cog className="h-12 w-12 mx-auto mb-3 opacity-30" />
               <p className="font-medium">No listings yet</p>
               <p className="text-sm mt-1">
-                <Link href="/post-ad" className="text-brand-500 hover:underline">
+                <Link href="/list-machine" className="text-brand-500 hover:underline">
                   List your first machine
                 </Link>{' '}
                 to get started.

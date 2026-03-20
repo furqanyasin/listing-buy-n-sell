@@ -3,32 +3,22 @@ import { Separator } from '@/components/ui/separator'
 
 const FOOTER_LINKS = {
   'Buy & Sell': [
-    { label: 'Used Machines', href: '/cars' },
-    { label: 'New Machines', href: '/new-cars' },
-    { label: 'Parts & Accessories', href: '/parts' },
-    { label: 'List a Machine', href: '/post-ad' },
-    { label: 'Suppliers', href: '/dealers' },
+    { label: 'Browse Machines', href: '/machines' },
+    { label: 'List a Machine', href: '/list-machine' },
+    { label: 'Suppliers', href: '/suppliers' },
+    { label: 'Become a Supplier', href: '/suppliers/register' },
   ],
-  'Research': [
-    { label: 'Machine Reviews', href: '/blog/reviews' },
-    { label: 'Price Guide', href: '/prices' },
-    { label: 'Compare Machines', href: '/new-cars/compare' },
-    { label: 'Inspection Services', href: '/inspection' },
+  'Resources': [
     { label: 'Blog', href: '/blog' },
+    { label: 'Sitemap', href: '/sitemap.xml' },
   ],
   'Your Account': [
     { label: 'Sign In', href: '/auth/login' },
     { label: 'Register', href: '/auth/register' },
     { label: 'My Dashboard', href: '/dashboard' },
-    { label: 'My Listings', href: '/dashboard/ads' },
+    { label: 'My Listings', href: '/dashboard' },
     { label: 'Saved Machines', href: '/dashboard/saved' },
-  ],
-  'Company': [
-    { label: 'About Us', href: '/about' },
-    { label: 'Contact', href: '/contact' },
-    { label: 'Advertise', href: '/advertise' },
-    { label: 'Careers', href: '/careers' },
-    { label: 'Press', href: '/press' },
+    { label: 'Messages', href: '/dashboard/messages' },
   ],
 }
 

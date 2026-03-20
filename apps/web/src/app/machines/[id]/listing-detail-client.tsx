@@ -203,7 +203,7 @@ export function ListingDetailClient({ id }: { id: string }) {
 
   async function handleChat() {
     if (!isAuthenticated) {
-      router.push(`/auth/login?redirect=/cars/${id}`)
+      router.push(`/auth/login?redirect=/machines/${id}`)
       return
     }
     createConversation.mutate(id, {
@@ -264,7 +264,7 @@ export function ListingDetailClient({ id }: { id: string }) {
           <h1 className="text-xl font-semibold text-surface-700">Listing not found</h1>
           <p className="text-surface-500 mt-2 mb-6">This listing may have been removed or sold.</p>
           <Button asChild>
-            <Link href="/cars">Browse all machines</Link>
+            <Link href="/machines">Browse all machines</Link>
           </Button>
         </div>
       </PageWrapper>
@@ -296,7 +296,7 @@ export function ListingDetailClient({ id }: { id: string }) {
       <div className="max-w-5xl mx-auto">
         {/* Breadcrumb */}
         <nav className="text-sm text-surface-500 mb-4 flex items-center gap-1.5">
-          <Link href="/cars" className="hover:text-brand-600">
+          <Link href="/machines" className="hover:text-brand-600">
             Machines
           </Link>
           <span>/</span>

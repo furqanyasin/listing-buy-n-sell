@@ -27,7 +27,7 @@ export function MakesSection() {
             : display?.map((make) => (
                 <Link
                   key={make.id}
-                  href={`/cars?makeId=${make.id}`}
+                  href={`/machines?makeId=${make.id}`}
                   className={cn(
                     'flex flex-col items-center justify-center gap-2 p-3 rounded-xl',
                     'bg-white border border-surface-200 shadow-card',
@@ -58,7 +58,7 @@ export function MakesSection() {
         {!isLoading && makes && makes.length > 12 && (
           <div className="text-center mt-6">
             <Link
-              href="/cars"
+              href="/machines"
               className="text-sm text-brand-600 hover:text-brand-700 font-medium hover:underline"
             >
               View all {makes.length} brands →

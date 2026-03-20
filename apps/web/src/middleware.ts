@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 // Routes that require authentication
-const PROTECTED_ROUTES = ['/dashboard', '/post-ad']
+const PROTECTED_ROUTES = ['/dashboard', '/list-machine']
 
 // Routes that redirect authenticated users away (login, register)
 const AUTH_ROUTES = ['/auth/login', '/auth/register']
@@ -34,7 +34,7 @@ export const config = {
   matcher: [
     // Match protected and auth routes only
     '/dashboard/:path*',
-    '/post-ad/:path*',
+    '/list-machine/:path*',
     '/auth/login',
     '/auth/register',
   ],
