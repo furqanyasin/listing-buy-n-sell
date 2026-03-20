@@ -33,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
-  // Dynamic: dealers
+  // Dynamic: suppliers
   const dealers = await fetchJson<{ slug: string; updatedAt: string }[]>('/dealers')
   const dealerRoutes: MetadataRoute.Sitemap = (dealers ?? []).map((d) => ({
     url: `${BASE_URL}/dealers/${d.slug}`,

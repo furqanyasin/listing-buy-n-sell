@@ -50,7 +50,7 @@ export function useRegister() {
       const user = await getMeApi()
       setAuth(user, tokens.accessToken)
 
-      toast.success('Account created! Welcome to PW Clone.')
+      toast.success('Account created! Welcome to CNC Machine Bazaar.')
       router.push('/dashboard')
     },
     onError: (error: { response?: { data?: { message?: string } } }) => {

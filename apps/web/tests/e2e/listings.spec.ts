@@ -9,9 +9,9 @@ test.describe('Listings', () => {
   test('filters work with URL sync', async ({ page }) => {
     await page.goto('/cars')
     // URL should update when typing in search
-    await page.getByPlaceholder(/search/i).fill('Toyota')
+    await page.getByPlaceholder(/search/i).fill('Haas')
     await page.getByPlaceholder(/search/i).press('Enter')
-    await expect(page).toHaveURL(/q=Toyota/)
+    await expect(page).toHaveURL(/q=Haas/)
   })
 
   test('clicking a listing card navigates to detail', async ({ page }) => {

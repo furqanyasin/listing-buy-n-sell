@@ -13,7 +13,7 @@ export class AppController {
       status: 'ok',
       timestamp: new Date().toISOString(),
       version: '1.0.0',
-      service: 'pw-clone-api',
+      service: 'cnc-machine-bazaar-api',
     }
   }
 }

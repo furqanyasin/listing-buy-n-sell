@@ -3,7 +3,7 @@ import { z } from 'zod'
 const CURRENT_YEAR = new Date().getFullYear()
 
 export const listingStep1Schema = z.object({
-  makeId: z.string().min(1, 'Make is required'),
+  makeId: z.string().min(1, 'Brand is required'),
   modelId: z.string().min(1, 'Model is required'),
   year: z
     .number({ invalid_type_error: 'Year is required' })
@@ -12,17 +12,17 @@ export const listingStep1Schema = z.object({
     .max(CURRENT_YEAR + 1, 'Year cannot be in the future'),
   condition: z.enum(['NEW', 'USED'], { required_error: 'Condition is required' }),
   bodyType: z.enum(
-    ['SEDAN', 'SUV', 'HATCHBACK', 'PICKUP', 'VAN', 'TRUCK', 'COUPE', 'CONVERTIBLE', 'WAGON', 'OTHER'],
-    { required_error: 'Body type is required' },
+    ['CNC_MILL', 'CNC_LATHE', 'LASER_CUTTER', 'CNC_ROUTER', 'PRESS_BRAKE', 'WATERJET', 'PLASMA_CUTTER', '3D_PRINTER'],
+    { required_error: 'Machine type is required' },
   ),
-  fuelType: z.enum(['PETROL', 'DIESEL', 'HYBRID', 'ELECTRIC', 'CNG', 'LPG'], {
-    required_error: 'Fuel type is required',
+  fuelType: z.enum(['ELECTRIC', 'HYDRAULIC', 'PNEUMATIC', 'DIESEL', 'MANUAL'], {
+    required_error: 'Power type is required',
   }),
-  transmission: z.enum(['AUTOMATIC', 'MANUAL'], { required_error: 'Transmission is required' }),
+  transmission: z.enum(['AUTOMATIC', 'MANUAL'], { required_error: 'Control type is required' }),
   mileage: z
-    .number({ invalid_type_error: 'Mileage is required' })
+    .number({ invalid_type_error: 'Running hours is required' })
     .int()
-    .min(0, 'Mileage cannot be negative'),
+    .min(0, 'Running hours cannot be negative'),
   color: z.string().min(1, 'Color is required').max(50),
 })
 

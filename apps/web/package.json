@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest run --passWithNoTests --exclude tests/e2e",
     "test:ui": "vitest --ui",
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf .next out"

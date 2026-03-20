@@ -2,7 +2,7 @@
   "name": "pw-clone",
   "version": "0.0.1",
   "private": true,
-  "description": "PakWheels Clone — Professional automotive classified platform",
+  "description": "CNC Machine Bazaar — Industrial machinery marketplace platform",
   "workspaces": [
     "apps/*",
     "packages/*"

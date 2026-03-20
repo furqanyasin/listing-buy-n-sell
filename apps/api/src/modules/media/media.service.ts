@@ -18,7 +18,7 @@ export class MediaService {
       cloudinary.uploader
         .upload_stream(
           {
-            folder: 'pw-clone/listings',
+            folder: 'cnc-machine-bazaar/listings',
             resource_type: 'image',
             transformation: [
               {

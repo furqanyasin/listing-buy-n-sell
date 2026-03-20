@@ -33,7 +33,7 @@ export default function LoginPage() {
     <Card className="w-full max-w-md shadow-modal">
       <CardHeader className="text-center pb-2">
         <CardTitle className="text-2xl">Welcome back</CardTitle>
-        <CardDescription>Sign in to your PW Clone account</CardDescription>
+        <CardDescription>Sign in to your CNC Machine Bazaar account</CardDescription>
       </CardHeader>
 
       <CardContent className="space-y-5 pt-2">

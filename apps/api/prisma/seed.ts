@@ -205,11 +205,11 @@ async function seedTestUsers() {
   console.log('Seeding test users...')
 
   const TEST_USERS = [
-    { name: 'Admin',        email: 'admin@pw-clone.com',   password: 'Admin@123456',  role: 'ADMIN'  },
-    { name: 'Editor Sara',  email: 'editor@pw-clone.com',  password: 'Editor@123456', role: 'EDITOR' },
-    { name: 'Ali Dealer',   email: 'dealer@pw-clone.com',  password: 'Dealer@123456', role: 'DEALER' },
-    { name: 'Ahmed User',   email: 'user@pw-clone.com',    password: 'User@1234567',  role: 'USER'   },
-    { name: 'Fatima Buyer', email: 'buyer@pw-clone.com',   password: 'Buyer@123456',  role: 'USER'   },
+    { name: 'Admin',        email: 'admin@cncmachinebazaar.com',   password: 'Admin@123456',  role: 'ADMIN'  },
+    { name: 'Editor Sara',  email: 'editor@cncmachinebazaar.com',  password: 'Editor@123456', role: 'EDITOR' },
+    { name: 'Ali Dealer',   email: 'dealer@cncmachinebazaar.com',  password: 'Dealer@123456', role: 'DEALER' },
+    { name: 'Ahmed User',   email: 'user@cncmachinebazaar.com',    password: 'User@1234567',  role: 'USER'   },
+    { name: 'Fatima Buyer', email: 'buyer@cncmachinebazaar.com',   password: 'Buyer@123456',  role: 'USER'   },
   ] as const
 
   for (const u of TEST_USERS) {
@@ -236,7 +236,7 @@ async function seedTestUsers() {
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
-  console.log('\n── PakWheels Clone Seed ──────────────────────────────────')
+  console.log('\n── CNC Machine Bazaar Seed ──────────────────────────────')
   await seedMakesAndModels()
   await seedCities()
   await seedTestUsers()
