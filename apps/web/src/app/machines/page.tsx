@@ -38,6 +38,7 @@ function filtersFromParams(sp: ReturnType<typeof useSearchParams>): ListingFilte
   f.priceMin = num('priceMin')
   f.priceMax = num('priceMax')
   f.mileageMax = num('mileageMax')
+  if (sp.get('isFeatured') === 'true') f.isFeatured = true
   f.page = num('page') ?? 1
   return f
 }

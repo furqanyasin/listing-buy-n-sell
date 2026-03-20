@@ -165,11 +165,11 @@ Seeded by `npm run db:seed`:
 
 | Role | Email | Password | Access |
 |---|---|---|---|
-| Admin | admin@pw-clone.com | Admin@123456 | Full access + admin panel |
-| Editor | editor@pw-clone.com | Editor@123456 | Blog CMS + listing moderation |
-| Dealer | dealer@pw-clone.com | Dealer@123456 | Supplier profile pre-set |
-| User | user@pw-clone.com | User@1234567 | Regular buyer/seller |
-| Buyer | buyer@pw-clone.com | Buyer@123456 | Second user (for messaging tests) |
+| Admin | admin@cncmachinebazaar.com | Admin@123456 | Full access + admin panel |
+| Editor | editor@cncmachinebazaar.com | Editor@123456 | Blog CMS + listing moderation |
+| Supplier | dealer@cncmachinebazaar.com | Dealer@123456 | Supplier profile pre-set |
+| User | user@cncmachinebazaar.com | User@1234567 | Regular buyer/seller |
+| Buyer | buyer@cncmachinebazaar.com | Buyer@123456 | Second user (for messaging tests) |
 
 ---
 
@@ -178,12 +178,12 @@ Seeded by `npm run db:seed`:
 | Route | Description |
 |---|---|
 | `/` | Homepage — hero, featured machines, Browse by Brand |
-| `/cars` | Listings with URL-synced filters, search, pagination |
-| `/cars/[id]` | Listing detail — gallery, specs, seller card, related listings |
-| `/post-ad` | 3-step listing creation form (auth required) |
-| `/dealers` | Supplier directory |
-| `/dealers/[slug]` | Supplier profile with inventory and reviews |
-| `/dealers/register` | Register as a supplier |
+| `/machines` | Listings with URL-synced filters, search, pagination |
+| `/machines/[id]` | Listing detail — gallery, specs, seller card, related listings |
+| `/list-machine` | 3-step listing creation form (auth required) |
+| `/suppliers` | Supplier directory |
+| `/suppliers/[slug]` | Supplier profile with inventory and reviews |
+| `/suppliers/register` | Register as a supplier |
 | `/blog` | Blog listing with category filter |
 | `/blog/[slug]` | Blog post detail |
 | `/auth/login` | Login |
