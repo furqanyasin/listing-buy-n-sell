@@ -7,29 +7,28 @@ import type { ListingFilters } from '@pw-clone/types'
 // ─── Label maps ───────────────────────────────────────────────────────────────
 
 const FUEL_LABELS: Record<string, string> = {
-  PETROL: 'Petrol',
-  DIESEL: 'Diesel',
-  HYBRID: 'Hybrid',
   ELECTRIC: 'Electric',
-  CNG: 'CNG',
-  LPG: 'LPG',
+  HYDRAULIC: 'Hydraulic',
+  PNEUMATIC: 'Pneumatic',
+  DIESEL: 'Diesel',
+  MANUAL: 'Manual',
 }
 
 const TRANSMISSION_LABELS: Record<string, string> = {
-  AUTOMATIC: 'Automatic',
+  AUTOMATIC: 'CNC (Automated)',
   MANUAL: 'Manual',
 }
 
 const BODY_LABELS: Record<string, string> = {
-  SEDAN: 'Sedan',
-  SUV: 'SUV',
-  HATCHBACK: 'Hatchback',
-  PICKUP: 'Pickup',
-  VAN: 'Van',
-  TRUCK: 'Truck',
-  COUPE: 'Coupe',
-  CONVERTIBLE: 'Convertible',
-  WAGON: 'Wagon',
+  CNC_MILL: 'CNC Mill',
+  CNC_LATHE: 'CNC Lathe',
+  LASER_CUTTER: 'Laser Cutter',
+  CNC_ROUTER: 'CNC Router',
+  PRESS_BRAKE: 'Press Brake',
+  WATERJET: 'Waterjet',
+  PLASMA_CUTTER: 'Plasma Cutter',
+  '3D_PRINTER': '3D Printer',
+  BORING_MILL: 'Boring Mill',
   OTHER: 'Other',
 }
 
@@ -82,7 +81,7 @@ export function ActiveFilters({ filters, onChange }: ActiveFiltersProps) {
   }
   if (filters.makeId) {
     const makeName = makes.find((m) => m.id === filters.makeId)?.name ?? filters.makeId
-    // removing make also clears model
+    // removing brand also clears model
     chips.push({ label: makeName, keys: ['makeId', 'modelId'] })
   }
   if (filters.modelId) {

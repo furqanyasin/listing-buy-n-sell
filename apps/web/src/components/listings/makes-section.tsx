@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Car } from 'lucide-react'
+import { Cog } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useMakes } from '@/lib/hooks/use-reference'
 import { cn } from '@/lib/utils'
@@ -45,7 +45,7 @@ export function MakesSection() {
                         className="object-contain"
                       />
                     ) : (
-                      <Car className="h-7 w-7 text-surface-400 group-hover:text-brand-500 transition-colors" />
+                      <Cog className="h-7 w-7 text-surface-400 group-hover:text-brand-500 transition-colors" />
                     )}
                   </div>
                   <span className="text-xs font-medium text-surface-700 group-hover:text-brand-600 transition-colors leading-tight">

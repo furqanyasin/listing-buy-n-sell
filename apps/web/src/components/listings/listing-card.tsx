@@ -20,15 +20,15 @@ function formatPrice(price: number): string {
   return price.toLocaleString('en-PK')
 }
 
-function formatMileage(km: number): string {
-  if (km >= 1000) return `${Math.round(km / 1000)}k km`
-  return `${km} km`
+function formatHours(hours: number): string {
+  if (hours >= 1000) return `${Math.round(hours / 1000)}k hrs`
+  return `${hours} hrs`
 }
 
 export function ListingCard({ listing, className }: ListingCardProps) {
   const primaryImage = listing.images?.[0] ?? null
-  const fuelLabel = listing.fuelType.charAt(0) + listing.fuelType.slice(1).toLowerCase()
-  const transmLabel = listing.transmission === 'AUTOMATIC' ? 'Auto' : 'Manual'
+  const powerLabel = listing.fuelType.charAt(0) + listing.fuelType.slice(1).toLowerCase()
+  const controlLabel = listing.transmission === 'AUTOMATIC' ? 'CNC' : 'Manual'
 
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
   const { data: favoriteIds } = useFavoriteIds()
@@ -126,15 +126,15 @@ export function ListingCard({ listing, className }: ListingCardProps) {
         <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-surface-500">
           <span className="flex items-center gap-1">
             <Gauge className="h-3 w-3" />
-            {formatMileage(listing.mileage)}
+            {formatHours(listing.mileage)}
           </span>
           <span className="flex items-center gap-1">
             <Fuel className="h-3 w-3" />
-            {fuelLabel}
+            {powerLabel}
           </span>
           <span className="flex items-center gap-1">
             <Zap className="h-3 w-3" />
-            {transmLabel}
+            {controlLabel}
           </span>
           <span className="flex items-center gap-1">
             <Calendar className="h-3 w-3" />

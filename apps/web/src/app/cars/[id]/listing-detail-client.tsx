@@ -11,7 +11,7 @@ import {
   Zap,
   Calendar,
   Palette,
-  Car,
+  Cog,
   Phone,
   ChevronLeft,
   ChevronRight,
@@ -260,11 +260,11 @@ export function ListingDetailClient({ id }: { id: string }) {
     return (
       <PageWrapper>
         <div className="max-w-5xl mx-auto text-center py-20">
-          <Car className="h-12 w-12 mx-auto mb-4 text-surface-300" />
+          <Cog className="h-12 w-12 mx-auto mb-4 text-surface-300" />
           <h1 className="text-xl font-semibold text-surface-700">Listing not found</h1>
           <p className="text-surface-500 mt-2 mb-6">This listing may have been removed or sold.</p>
           <Button asChild>
-            <Link href="/cars">Browse all cars</Link>
+            <Link href="/cars">Browse all machines</Link>
           </Button>
         </div>
       </PageWrapper>
@@ -272,9 +272,9 @@ export function ListingDetailClient({ id }: { id: string }) {
   }
 
   const hasImages = images.length > 0
-  const fuelLabel = listing.fuelType.charAt(0) + listing.fuelType.slice(1).toLowerCase()
-  const bodyLabel = listing.bodyType.charAt(0) + listing.bodyType.slice(1).toLowerCase()
-  const transmLabel = listing.transmission === 'AUTOMATIC' ? 'Automatic' : 'Manual'
+  const powerLabel = listing.fuelType.charAt(0) + listing.fuelType.slice(1).toLowerCase()
+  const typeLabel = listing.bodyType.charAt(0) + listing.bodyType.slice(1).toLowerCase()
+  const controlLabel = listing.transmission === 'AUTOMATIC' ? 'CNC (Automated)' : 'Manual'
 
   const whatsAppUrl = listing.seller?.phone
     ? `https://wa.me/${toWhatsAppNumber(listing.seller.phone)}?text=${encodeURIComponent(
@@ -297,7 +297,7 @@ export function ListingDetailClient({ id }: { id: string }) {
         {/* Breadcrumb */}
         <nav className="text-sm text-surface-500 mb-4 flex items-center gap-1.5">
           <Link href="/cars" className="hover:text-brand-600">
-            Cars
+            Machines
           </Link>
           <span>/</span>
           <span className="text-surface-800 font-medium line-clamp-1">
@@ -361,7 +361,7 @@ export function ListingDetailClient({ id }: { id: string }) {
                   </>
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <Car className="h-20 w-20 text-surface-300" />
+                    <Cog className="h-20 w-20 text-surface-300" />
                   </div>
                 )}
               </div>
@@ -420,25 +420,25 @@ export function ListingDetailClient({ id }: { id: string }) {
 
             {/* Specs grid */}
             <div>
-              <h2 className="font-semibold text-surface-800 mb-3">Vehicle Details</h2>
+              <h2 className="font-semibold text-surface-800 mb-3">Machine Details</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 <SpecItem
-                  icon={Car}
-                  label="Make / Model"
+                  icon={Cog}
+                  label="Brand / Model"
                   value={`${listing.make.name} ${listing.model.name}`}
                 />
                 <SpecItem icon={Calendar} label="Year" value={String(listing.year)} />
                 <SpecItem
                   icon={Gauge}
-                  label="Mileage"
-                  value={`${listing.mileage.toLocaleString()} km`}
+                  label="Running Hours"
+                  value={`${listing.mileage.toLocaleString()} hrs`}
                 />
-                <SpecItem icon={Fuel} label="Fuel Type" value={fuelLabel} />
-                <SpecItem icon={Zap} label="Transmission" value={transmLabel} />
-                <SpecItem icon={Car} label="Body Type" value={bodyLabel} />
+                <SpecItem icon={Fuel} label="Power Type" value={powerLabel} />
+                <SpecItem icon={Zap} label="Control Type" value={controlLabel} />
+                <SpecItem icon={Cog} label="Machine Type" value={typeLabel} />
                 <SpecItem icon={Palette} label="Color" value={listing.color} />
                 <SpecItem
-                  icon={Car}
+                  icon={Cog}
                   label="Condition"
                   value={listing.condition === 'NEW' ? 'New' : 'Used'}
                 />
@@ -460,6 +460,7 @@ export function ListingDetailClient({ id }: { id: string }) {
           <div className="space-y-4">
             <div className="rounded-2xl border border-surface-200 bg-white p-5 space-y-4 shadow-card sticky top-6">
               <h2 className="font-semibold text-surface-800">Contact Seller</h2>
+
 
               {listing.seller && (
                 <div className="flex items-center gap-3">
@@ -521,7 +522,7 @@ export function ListingDetailClient({ id }: { id: string }) {
                   onClick={() => toggleFavorite.mutate(id)}
                 >
                   <Heart className={cn('h-4 w-4', isFavorited && 'fill-current')} />
-                  {isFavorited ? 'Saved' : 'Save Car'}
+                  {isFavorited ? 'Saved' : 'Save Machine'}
                 </Button>
               )}
 

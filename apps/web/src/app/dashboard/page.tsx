@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Car, Heart, Eye, Plus, Trash2, ExternalLink, Pencil, Settings, MessageCircle } from 'lucide-react'
+import { Cog, Heart, Eye, Plus, Trash2, ExternalLink, Pencil, Settings, MessageCircle } from 'lucide-react'
 import { PageWrapper } from '@/components/layout'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -46,7 +46,7 @@ function ListingRow({
           <Image src={primaryImage.url} alt={listing.title} fill className="object-cover" sizes="80px" />
         ) : (
           <div className="flex items-center justify-center h-full">
-            <Car className="h-6 w-6 text-surface-300" />
+            <Cog className="h-6 w-6 text-surface-300" />
           </div>
         )}
       </div>
@@ -109,9 +109,9 @@ export default function DashboardPage() {
   }
 
   const stats = [
-    { label: 'My Ads', value: listings.length.toString(), icon: Car, color: 'text-brand-500 bg-brand-50', href: undefined },
-    { label: 'Active Ads', value: activeCount.toString(), icon: Eye, color: 'text-green-500 bg-green-50', href: undefined },
-    { label: 'Saved Cars', value: '→', icon: Heart, color: 'text-red-500 bg-red-50', href: '/dashboard/saved' },
+    { label: 'My Listings', value: listings.length.toString(), icon: Cog, color: 'text-brand-500 bg-brand-50', href: undefined },
+    { label: 'Active Listings', value: activeCount.toString(), icon: Eye, color: 'text-green-500 bg-green-50', href: undefined },
+    { label: 'Saved Machines', value: '→', icon: Heart, color: 'text-red-500 bg-red-50', href: '/dashboard/saved' },
     { label: 'Messages', value: '→', icon: MessageCircle, color: 'text-purple-500 bg-purple-50', href: '/dashboard/messages' },
   ]
 
@@ -120,7 +120,7 @@ export default function DashboardPage() {
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-surface-900">My Dashboard</h1>
-          <p className="text-surface-500 mt-1">Manage your car listings and activity.</p>
+          <p className="text-surface-500 mt-1">Manage your machine listings and activity.</p>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline" size="icon" asChild title="Account settings">
@@ -131,7 +131,7 @@ export default function DashboardPage() {
           <Button asChild>
             <Link href="/post-ad">
               <Plus className="h-4 w-4" />
-              Post Ad
+              List Machine
             </Link>
           </Button>
         </div>
@@ -171,7 +171,7 @@ export default function DashboardPage() {
       {/* Listings */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">My Ads</CardTitle>
+          <CardTitle className="text-base">My Listings</CardTitle>
         </CardHeader>
         <CardContent>
           {isLoading ? (
@@ -182,11 +182,11 @@ export default function DashboardPage() {
             </div>
           ) : listings.length === 0 ? (
             <div className="text-center py-12 text-surface-400">
-              <Car className="h-12 w-12 mx-auto mb-3 opacity-30" />
-              <p className="font-medium">No ads yet</p>
+              <Cog className="h-12 w-12 mx-auto mb-3 opacity-30" />
+              <p className="font-medium">No listings yet</p>
               <p className="text-sm mt-1">
                 <Link href="/post-ad" className="text-brand-500 hover:underline">
-                  Post your first car listing
+                  List your first machine
                 </Link>{' '}
                 to get started.
               </p>

@@ -3,24 +3,28 @@
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import { loginApi, registerApi, logoutApi, forgotPasswordApi, resetPasswordApi } from '@/lib/api/auth'
+import { loginApi, registerApi, logoutApi, forgotPasswordApi, resetPasswordApi, getMeApi } from '@/lib/api/auth'
 import { useAuthStore } from '@/store/auth.store'
 import type { LoginPayload, RegisterPayload } from '@/lib/api/auth'
 
 // ─── useLogin ─────────────────────────────────────────────────────────────────
 
 export function useLogin() {
+  const { setAuth } = useAuthStore()
   const router = useRouter()
 
   return useMutation({
     mutationFn: (payload: LoginPayload) => loginApi(payload),
-    onSuccess: (tokens) => {
-      // Store tokens in localStorage for the Axios interceptor
+    onSuccess: async (tokens) => {
+      // Persist tokens so the Axios interceptor can attach them immediately
       localStorage.setItem('accessToken', tokens.accessToken)
       localStorage.setItem('refreshToken', tokens.refreshToken)
 
-      // Update Zustand store — user profile fetch happens separately
-      // For now store minimal data; full profile loaded in Phase 9 (dashboard)
+      // Fetch the full user profile and hydrate the auth store.
+      // setAuth() also writes the pw_auth_token cookie that middleware needs.
+      const user = await getMeApi()
+      setAuth(user, tokens.accessToken)
+
       toast.success('Welcome back!')
       router.push('/dashboard')
     },
@@ -34,13 +38,18 @@ export function useLogin() {
 // ─── useRegister ──────────────────────────────────────────────────────────────
 
 export function useRegister() {
+  const { setAuth } = useAuthStore()
   const router = useRouter()
 
   return useMutation({
     mutationFn: (payload: RegisterPayload) => registerApi(payload),
-    onSuccess: (tokens) => {
+    onSuccess: async (tokens) => {
       localStorage.setItem('accessToken', tokens.accessToken)
       localStorage.setItem('refreshToken', tokens.refreshToken)
+
+      const user = await getMeApi()
+      setAuth(user, tokens.accessToken)
+
       toast.success('Account created! Welcome to PW Clone.')
       router.push('/dashboard')
     },

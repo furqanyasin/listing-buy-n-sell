@@ -10,6 +10,7 @@ import { NAV_LINKS } from './nav-config'
 import { UserMenu } from './user-menu'
 import { MobileMenu } from './mobile-menu'
 import { useAuthStore } from '@/store/auth.store'
+import { useUnreadCount } from '@/lib/hooks/use-notifications'
 
 // ─── Logo ─────────────────────────────────────────────────────────────────────
 
@@ -17,14 +18,14 @@ function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2.5 shrink-0">
       <div className="w-9 h-9 rounded-xl bg-brand-500 flex items-center justify-center shadow-sm">
-        <span className="text-white font-black text-base leading-none">PW</span>
+        <span className="text-white font-black text-base leading-none">CMB</span>
       </div>
       <div className="hidden sm:flex flex-col leading-none">
         <span className="font-extrabold text-surface-900 text-lg tracking-tight">
-          PW Clone
+          CNC Machine Bazaar
         </span>
         <span className="text-[10px] text-surface-400 font-medium tracking-widest uppercase">
-          Cars · Bikes · More
+          CNC · Laser · More
         </span>
       </div>
     </Link>
@@ -63,6 +64,8 @@ function DesktopNavLink({
 export function Header() {
   const pathname = usePathname()
   const { isAuthenticated } = useAuthStore()
+  const { data: unreadData } = useUnreadCount()
+  const unreadCount = unreadData?.count ?? 0
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -129,8 +132,11 @@ export function Header() {
                   >
                     <Link href="/dashboard/notifications">
                       <Bell className="h-5 w-5" />
-                      {/* Notification dot — will be dynamic in Phase 13 */}
-                      <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white" />
+                      {unreadCount > 0 && (
+                        <span className="absolute top-1.5 right-1.5 min-w-[16px] h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center px-0.5 ring-2 ring-white">
+                          {unreadCount > 99 ? '99+' : unreadCount}
+                        </span>
+                      )}
                     </Link>
                   </Button>
 
@@ -138,7 +144,7 @@ export function Header() {
                   <Button size="sm" className="hidden sm:inline-flex gap-1.5" asChild>
                     <Link href="/post-ad">
                       <Plus className="h-4 w-4" />
-                      Post Ad
+                      List Machine
                     </Link>
                   </Button>
 

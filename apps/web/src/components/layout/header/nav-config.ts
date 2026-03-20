@@ -6,20 +6,20 @@ export interface NavLink {
 
 export const NAV_LINKS: NavLink[] = [
   {
-    label: 'Buy Cars',
+    label: 'Buy Machines',
     href: '/cars',
   },
   {
-    label: 'New Cars',
+    label: 'New Machines',
     href: '/new-cars',
     children: [
-      { label: 'Browse New Cars', href: '/new-cars' },
-      { label: 'Compare Cars', href: '/new-cars/compare' },
-      { label: 'Car Reviews', href: '/new-cars/reviews' },
+      { label: 'Browse New Machines', href: '/new-cars' },
+      { label: 'Compare Machines', href: '/new-cars/compare' },
+      { label: 'Machine Reviews', href: '/new-cars/reviews' },
     ],
   },
   {
-    label: 'Dealers',
+    label: 'Suppliers',
     href: '/dealers',
   },
   {
@@ -27,8 +27,8 @@ export const NAV_LINKS: NavLink[] = [
     href: '/prices',
     children: [
       { label: 'Price Guide', href: '/prices' },
-      { label: 'Used Car Prices', href: '/prices/used' },
-      { label: 'New Car Prices', href: '/prices/new' },
+      { label: 'Used Machine Prices', href: '/prices/used' },
+      { label: 'New Machine Prices', href: '/prices/new' },
     ],
   },
   {
@@ -39,8 +39,8 @@ export const NAV_LINKS: NavLink[] = [
 
 export const USER_MENU_LINKS = [
   { label: 'My Dashboard', href: '/dashboard' },
-  { label: 'My Ads', href: '/dashboard/ads' },
-  { label: 'Saved Cars', href: '/dashboard/saved' },
+  { label: 'My Listings', href: '/dashboard/ads' },
+  { label: 'Saved Machines', href: '/dashboard/saved' },
   { label: 'Messages', href: '/dashboard/messages' },
   { label: 'Account Settings', href: '/dashboard/settings' },
 ]

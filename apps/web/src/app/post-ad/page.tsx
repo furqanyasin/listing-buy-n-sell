@@ -34,34 +34,33 @@ import { cn } from '@/lib/utils'
 
 // ─── Types & Constants ────────────────────────────────────────────────────────
 
-const STEPS = ['Vehicle Info', 'Pricing & Details', 'Photos'] as const
+const STEPS = ['Machine Info', 'Pricing & Details', 'Photos'] as const
 const CURRENT_YEAR = new Date().getFullYear()
 
 const YEARS = Array.from({ length: CURRENT_YEAR - 1969 }, (_, i) => CURRENT_YEAR - i)
 
 const BODY_TYPES = [
-  { value: 'SEDAN', label: 'Sedan' },
-  { value: 'SUV', label: 'SUV' },
-  { value: 'HATCHBACK', label: 'Hatchback' },
-  { value: 'PICKUP', label: 'Pickup / Truck' },
-  { value: 'VAN', label: 'Van' },
-  { value: 'TRUCK', label: 'Truck' },
-  { value: 'COUPE', label: 'Coupe' },
-  { value: 'CONVERTIBLE', label: 'Convertible' },
-  { value: 'WAGON', label: 'Wagon' },
+  { value: 'CNC_MILL', label: 'CNC Mill' },
+  { value: 'CNC_LATHE', label: 'CNC Lathe' },
+  { value: 'LASER_CUTTER', label: 'Laser Cutter' },
+  { value: 'CNC_ROUTER', label: 'CNC Router' },
+  { value: 'PRESS_BRAKE', label: 'Press Brake' },
+  { value: 'WATERJET', label: 'Waterjet' },
+  { value: 'PLASMA_CUTTER', label: 'Plasma Cutter' },
+  { value: '3D_PRINTER', label: '3D Printer' },
+  { value: 'BORING_MILL', label: 'Boring Mill' },
   { value: 'OTHER', label: 'Other' },
 ]
 
 const FUEL_TYPES = [
-  { value: 'PETROL', label: 'Petrol' },
-  { value: 'DIESEL', label: 'Diesel' },
-  { value: 'HYBRID', label: 'Hybrid' },
   { value: 'ELECTRIC', label: 'Electric' },
-  { value: 'CNG', label: 'CNG' },
-  { value: 'LPG', label: 'LPG' },
+  { value: 'HYDRAULIC', label: 'Hydraulic' },
+  { value: 'PNEUMATIC', label: 'Pneumatic' },
+  { value: 'DIESEL', label: 'Diesel' },
+  { value: 'MANUAL', label: 'Manual' },
 ]
 
-// ─── Step 1: Vehicle Info ─────────────────────────────────────────────────────
+// ─── Step 1: Machine Info ─────────────────────────────────────────────────────
 
 function Step1({
   defaultValues,
@@ -86,10 +85,10 @@ function Step1({
 
   return (
     <form onSubmit={handleSubmit(onNext)} className="space-y-5">
-      {/* Make + Model */}
+      {/* Brand + Model */}
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <Label>Make *</Label>
+          <Label>Brand *</Label>
           <Select
             defaultValue={defaultValues.makeId}
             onValueChange={(v) => {
@@ -99,7 +98,7 @@ function Step1({
             }}
           >
             <SelectTrigger error={!!errors.makeId}>
-              <SelectValue placeholder="Select make" />
+              <SelectValue placeholder="Select brand" />
             </SelectTrigger>
             <SelectContent>
               {makes.map((m) => (
@@ -120,7 +119,7 @@ function Step1({
             onValueChange={(v) => setValue('modelId', v, { shouldValidate: true })}
           >
             <SelectTrigger error={!!errors.modelId}>
-              <SelectValue placeholder={selectedMakeId ? 'Select model' : 'Select make first'} />
+              <SelectValue placeholder={selectedMakeId ? 'Select model' : 'Select brand first'} />
             </SelectTrigger>
             <SelectContent>
               {models.map((m) => (
@@ -176,10 +175,10 @@ function Step1({
         </div>
       </div>
 
-      {/* Body Type + Fuel Type */}
+      {/* Machine Type + Power Type */}
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <Label>Body Type *</Label>
+          <Label>Machine Type *</Label>
           <Select
             defaultValue={defaultValues.bodyType}
             onValueChange={(v) =>
@@ -187,7 +186,7 @@ function Step1({
             }
           >
             <SelectTrigger error={!!errors.bodyType}>
-              <SelectValue placeholder="Select body type" />
+              <SelectValue placeholder="Select machine type" />
             </SelectTrigger>
             <SelectContent>
               {BODY_TYPES.map((b) => (
@@ -201,7 +200,7 @@ function Step1({
         </div>
 
         <div className="space-y-1.5">
-          <Label>Fuel Type *</Label>
+          <Label>Power Type *</Label>
           <Select
             defaultValue={defaultValues.fuelType}
             onValueChange={(v) =>
@@ -209,7 +208,7 @@ function Step1({
             }
           >
             <SelectTrigger error={!!errors.fuelType}>
-              <SelectValue placeholder="Select fuel type" />
+              <SelectValue placeholder="Select power type" />
             </SelectTrigger>
             <SelectContent>
               {FUEL_TYPES.map((f) => (
@@ -223,10 +222,10 @@ function Step1({
         </div>
       </div>
 
-      {/* Transmission + Mileage */}
+      {/* Control Type + Running Hours */}
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <Label>Transmission *</Label>
+          <Label>Control Type *</Label>
           <Select
             defaultValue={defaultValues.transmission}
             onValueChange={(v) =>
@@ -234,10 +233,10 @@ function Step1({
             }
           >
             <SelectTrigger error={!!errors.transmission}>
-              <SelectValue placeholder="Select transmission" />
+              <SelectValue placeholder="Select control type" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="AUTOMATIC">Automatic</SelectItem>
+              <SelectItem value="AUTOMATIC">CNC (Automated)</SelectItem>
               <SelectItem value="MANUAL">Manual</SelectItem>
             </SelectContent>
           </Select>
@@ -247,12 +246,12 @@ function Step1({
         </div>
 
         <div className="space-y-1.5">
-          <Label htmlFor="mileage">Mileage (km) *</Label>
+          <Label htmlFor="mileage">Running Hours *</Label>
           <Input
             id="mileage"
             type="number"
             min={0}
-            placeholder="e.g. 45000"
+            placeholder="e.g. 5000"
             {...register('mileage', { valueAsNumber: true })}
             className={errors.mileage ? 'border-red-500' : ''}
           />
@@ -265,7 +264,7 @@ function Step1({
         <Label htmlFor="color">Color *</Label>
         <Input
           id="color"
-          placeholder="e.g. Silver, White, Black..."
+          placeholder="e.g. Grey, White, Blue..."
           {...register('color')}
           className={errors.color ? 'border-red-500' : ''}
         />
@@ -309,10 +308,10 @@ function Step2({
     <form onSubmit={handleSubmit(onNext)} className="space-y-5">
       {/* Title */}
       <div className="space-y-1.5">
-        <Label htmlFor="title">Ad Title *</Label>
+        <Label htmlFor="title">Listing Title *</Label>
         <Input
           id="title"
-          placeholder="e.g. Toyota Corolla 2020 — Excellent Condition"
+          placeholder="e.g. Haas VF-2 CNC Mill 2020 — Excellent Condition"
           {...register('title')}
           className={errors.title ? 'border-red-500' : ''}
         />
@@ -325,7 +324,7 @@ function Step2({
         <Textarea
           id="description"
           rows={5}
-          placeholder="Describe your vehicle — service history, modifications, reason for sale..."
+          placeholder="Describe your machine — specifications, running hours, tooling included, reason for sale..."
           {...register('description')}
           className={errors.description ? 'border-red-500' : ''}
         />
@@ -341,7 +340,7 @@ function Step2({
           id="price"
           type="number"
           min={1}
-          placeholder="e.g. 3500000"
+          placeholder="e.g. 15000000"
           {...register('price', { valueAsNumber: true })}
           className={errors.price ? 'border-red-500' : ''}
         />
@@ -374,7 +373,7 @@ function Step2({
           <Label htmlFor="locationText">Area / Location</Label>
           <Input
             id="locationText"
-            placeholder="e.g. DHA Phase 5"
+            placeholder="e.g. Industrial Area, Lahore"
             {...register('locationText')}
           />
         </div>
@@ -545,13 +544,13 @@ function Step3({
           Back
         </Button>
         <Button onClick={handleSubmit} isLoading={isSubmitting} disabled={photos.length === 0}>
-          Post Ad
+          Submit Listing
         </Button>
       </div>
 
       {photos.length === 0 && (
         <p className="text-xs text-surface-400 text-center">
-          At least one photo is required to post an ad.
+          At least one photo is required to submit a listing.
         </p>
       )}
     </div>
@@ -635,10 +634,10 @@ export default function PostAdPage() {
         )
       }
 
-      toast.success('Your ad has been submitted for review!')
+      toast.success('Your listing has been submitted for review!')
       router.push('/dashboard')
     } catch {
-      toast.error('Failed to post ad. Please try again.')
+      toast.error('Failed to submit listing. Please try again.')
       setIsSubmitting(false)
     }
   }
@@ -647,8 +646,8 @@ export default function PostAdPage() {
     <PageWrapper contained>
       <div className="max-w-2xl mx-auto">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-surface-900">Post Your Car</h1>
-          <p className="text-surface-500 mt-1">Fill in the details to list your vehicle for sale.</p>
+          <h1 className="text-2xl font-bold text-surface-900">List Your Machine</h1>
+          <p className="text-surface-500 mt-1">Fill in the details to list your machine for sale.</p>
         </div>
 
         <Stepper step={step} />

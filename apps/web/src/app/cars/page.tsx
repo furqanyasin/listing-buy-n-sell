@@ -112,7 +112,7 @@ function CarsContent() {
     <div className="max-w-screen-2xl mx-auto">
       {/* Page header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-surface-900">Used Cars in Pakistan</h1>
+        <h1 className="text-2xl font-bold text-surface-900">Industrial Machines & Equipment</h1>
         {meta && (
           <p className="text-sm text-surface-500 mt-1">
             {meta.total.toLocaleString()} listing{meta.total !== 1 ? 's' : ''} found
@@ -126,7 +126,7 @@ function CarsContent() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-surface-400" />
           <Input
             className="pl-9"
-            placeholder="Search by make, model, or keyword..."
+            placeholder="Search by brand, model, or keyword..."
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />

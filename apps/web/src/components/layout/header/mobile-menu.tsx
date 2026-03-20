@@ -46,9 +46,9 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         <div className="flex items-center justify-between px-5 py-4 border-b border-surface-100">
           <Link href="/" onClick={onClose} className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center">
-              <span className="text-white font-black text-sm">PW</span>
+              <span className="text-white font-black text-sm">CMB</span>
             </div>
-            <span className="font-bold text-surface-900 text-lg">PW Clone</span>
+            <span className="font-bold text-surface-900 text-lg">CNC Machine Bazaar</span>
           </Link>
           <button
             onClick={onClose}

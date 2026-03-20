@@ -15,28 +15,27 @@ import { useMakes, useModelsByMake, useCities } from '@/lib/hooks/use-reference'
 import type { ListingFilters } from '@pw-clone/types'
 
 const FUEL_OPTIONS = [
-  { value: 'PETROL', label: 'Petrol' },
-  { value: 'DIESEL', label: 'Diesel' },
-  { value: 'HYBRID', label: 'Hybrid' },
   { value: 'ELECTRIC', label: 'Electric' },
-  { value: 'CNG', label: 'CNG' },
-  { value: 'LPG', label: 'LPG' },
+  { value: 'HYDRAULIC', label: 'Hydraulic' },
+  { value: 'PNEUMATIC', label: 'Pneumatic' },
+  { value: 'DIESEL', label: 'Diesel' },
+  { value: 'MANUAL', label: 'Manual' },
 ]
 
 const TRANSMISSION_OPTIONS = [
-  { value: 'AUTOMATIC', label: 'Automatic' },
+  { value: 'AUTOMATIC', label: 'CNC (Automated)' },
   { value: 'MANUAL', label: 'Manual' },
 ]
 
 const BODY_OPTIONS = [
-  { value: 'SEDAN', label: 'Sedan' },
-  { value: 'SUV', label: 'SUV' },
-  { value: 'HATCHBACK', label: 'Hatchback' },
-  { value: 'PICKUP', label: 'Pickup' },
-  { value: 'VAN', label: 'Van' },
-  { value: 'TRUCK', label: 'Truck' },
-  { value: 'COUPE', label: 'Coupe' },
-  { value: 'WAGON', label: 'Wagon' },
+  { value: 'CNC_MILL', label: 'CNC Mill' },
+  { value: 'CNC_LATHE', label: 'CNC Lathe' },
+  { value: 'LASER_CUTTER', label: 'Laser Cutter' },
+  { value: 'CNC_ROUTER', label: 'CNC Router' },
+  { value: 'PRESS_BRAKE', label: 'Press Brake' },
+  { value: 'WATERJET', label: 'Waterjet' },
+  { value: 'PLASMA_CUTTER', label: 'Plasma Cutter' },
+  { value: '3D_PRINTER', label: '3D Printer' },
 ]
 
 const SORT_OPTIONS = [
@@ -44,7 +43,7 @@ const SORT_OPTIONS = [
   { value: 'createdAt:asc', label: 'Oldest First' },
   { value: 'price:asc', label: 'Price: Low to High' },
   { value: 'price:desc', label: 'Price: High to Low' },
-  { value: 'mileage:asc', label: 'Lowest Mileage' },
+  { value: 'mileage:asc', label: 'Lowest Hours' },
   { value: 'year:desc', label: 'Year: Newest' },
 ]
 
@@ -114,9 +113,9 @@ export function ListingFiltersPanel({ filters, onChange }: ListingFiltersProps) 
         </Select>
       </div>
 
-      {/* Make */}
+      {/* Brand */}
       <div className="space-y-1.5">
-        <Label className="text-xs font-semibold text-surface-500 uppercase tracking-wider">Make</Label>
+        <Label className="text-xs font-semibold text-surface-500 uppercase tracking-wider">Brand</Label>
         <Select
           value={filters.makeId ?? ''}
           onValueChange={(v) => {
@@ -124,10 +123,10 @@ export function ListingFiltersPanel({ filters, onChange }: ListingFiltersProps) 
           }}
         >
           <SelectTrigger className="h-9 text-sm">
-            <SelectValue placeholder="Any make" />
+            <SelectValue placeholder="Any brand" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Any make</SelectItem>
+            <SelectItem value="">Any brand</SelectItem>
             {makes?.map((m) => (
               <SelectItem key={m.id} value={m.id}>{m.name}</SelectItem>
             ))}
@@ -144,7 +143,7 @@ export function ListingFiltersPanel({ filters, onChange }: ListingFiltersProps) 
           disabled={!filters.makeId}
         >
           <SelectTrigger className="h-9 text-sm">
-            <SelectValue placeholder={filters.makeId ? 'Any model' : 'Select make first'} />
+            <SelectValue placeholder={filters.makeId ? 'Any model' : 'Select brand first'} />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="">Any model</SelectItem>
@@ -213,15 +212,15 @@ export function ListingFiltersPanel({ filters, onChange }: ListingFiltersProps) 
         </div>
       </div>
 
-      {/* Fuel type */}
+      {/* Power Type */}
       <div className="space-y-1.5">
-        <Label className="text-xs font-semibold text-surface-500 uppercase tracking-wider">Fuel Type</Label>
+        <Label className="text-xs font-semibold text-surface-500 uppercase tracking-wider">Power Type</Label>
         <Select value={filters.fuelType ?? ''} onValueChange={(v) => set('fuelType', v)}>
           <SelectTrigger className="h-9 text-sm">
-            <SelectValue placeholder="Any fuel" />
+            <SelectValue placeholder="Any power type" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Any fuel</SelectItem>
+            <SelectItem value="">Any power type</SelectItem>
             {FUEL_OPTIONS.map((o) => (
               <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
             ))}
@@ -229,12 +228,12 @@ export function ListingFiltersPanel({ filters, onChange }: ListingFiltersProps) 
         </Select>
       </div>
 
-      {/* Transmission */}
+      {/* Control Type */}
       <div className="space-y-1.5">
-        <Label className="text-xs font-semibold text-surface-500 uppercase tracking-wider">Transmission</Label>
+        <Label className="text-xs font-semibold text-surface-500 uppercase tracking-wider">Control Type</Label>
         <Select value={filters.transmission ?? ''} onValueChange={(v) => set('transmission', v)}>
           <SelectTrigger className="h-9 text-sm">
-            <SelectValue placeholder="Any transmission" />
+            <SelectValue placeholder="Any control type" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="">Any</SelectItem>
@@ -245,12 +244,12 @@ export function ListingFiltersPanel({ filters, onChange }: ListingFiltersProps) 
         </Select>
       </div>
 
-      {/* Body type */}
+      {/* Machine Type */}
       <div className="space-y-1.5">
-        <Label className="text-xs font-semibold text-surface-500 uppercase tracking-wider">Body Type</Label>
+        <Label className="text-xs font-semibold text-surface-500 uppercase tracking-wider">Machine Type</Label>
         <Select value={filters.bodyType ?? ''} onValueChange={(v) => set('bodyType', v)}>
           <SelectTrigger className="h-9 text-sm">
-            <SelectValue placeholder="Any body type" />
+            <SelectValue placeholder="Any machine type" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="">Any</SelectItem>

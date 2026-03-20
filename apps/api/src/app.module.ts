@@ -17,6 +17,8 @@ import { FavoritesModule } from './modules/favorites/favorites.module'
 import { ConversationsModule } from './modules/conversations/conversations.module'
 import { BlogModule } from './modules/blog/blog.module'
 import { AdminModule } from './modules/admin/admin.module'
+import { ReviewsModule } from './modules/reviews/reviews.module'
+import { NotificationsModule } from './modules/notifications/notifications.module'
 import { ReferenceModule } from './modules/reference/reference.module'
 import { PrismaModule } from './prisma/prisma.module'
 
@@ -56,6 +58,8 @@ import { PrismaModule } from './prisma/prisma.module'
     ConversationsModule,
     BlogModule,
     AdminModule,
+    ReviewsModule,
+    NotificationsModule,
     ReferenceModule,
   ],
   controllers: [AppController],

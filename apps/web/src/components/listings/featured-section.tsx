@@ -17,8 +17,8 @@ export function FeaturedSection() {
     <section className="container mx-auto py-14">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h2 className="text-2xl font-bold text-surface-900">Featured Cars</h2>
-          <p className="text-surface-500 text-sm mt-1">Hand-picked deals this week</p>
+          <h2 className="text-2xl font-bold text-surface-900">Featured Machines</h2>
+          <p className="text-surface-500 text-sm mt-1">Hand-picked equipment this week</p>
         </div>
         <Button variant="outline" size="sm" asChild>
           <Link href="/cars?isFeatured=true" className="gap-2">

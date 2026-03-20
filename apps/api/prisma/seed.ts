@@ -201,27 +201,35 @@ async function seedCities() {
   console.log(`  ✓ ${count} cities`)
 }
 
-async function seedAdminUser() {
-  console.log('Seeding admin user...')
+async function seedTestUsers() {
+  console.log('Seeding test users...')
 
-  const email = 'admin@pw-clone.com'
-  const existing = await prisma.user.findUnique({ where: { email } })
+  const TEST_USERS = [
+    { name: 'Admin',        email: 'admin@pw-clone.com',   password: 'Admin@123456',  role: 'ADMIN'  },
+    { name: 'Editor Sara',  email: 'editor@pw-clone.com',  password: 'Editor@123456', role: 'EDITOR' },
+    { name: 'Ali Dealer',   email: 'dealer@pw-clone.com',  password: 'Dealer@123456', role: 'DEALER' },
+    { name: 'Ahmed User',   email: 'user@pw-clone.com',    password: 'User@1234567',  role: 'USER'   },
+    { name: 'Fatima Buyer', email: 'buyer@pw-clone.com',   password: 'Buyer@123456',  role: 'USER'   },
+  ] as const
 
-  if (!existing) {
-    const passwordHash = await bcrypt.hash('Admin@123456', 12)
-    await prisma.user.create({
-      data: {
-        name: 'Admin',
-        email,
-        passwordHash,
-        role: 'ADMIN',
-        isVerified: true,
-        isActive: true,
-      },
-    })
-    console.log(`  ✓ Admin created — email: ${email}  password: Admin@123456`)
-  } else {
-    console.log(`  ✓ Admin already exists (${email})`)
+  for (const u of TEST_USERS) {
+    const existing = await prisma.user.findUnique({ where: { email: u.email } })
+    if (!existing) {
+      const passwordHash = await bcrypt.hash(u.password, 12)
+      await prisma.user.create({
+        data: {
+          name: u.name,
+          email: u.email,
+          passwordHash,
+          role: u.role,
+          isVerified: true,
+          isActive: true,
+        },
+      })
+      console.log(`  ✓ ${u.role.padEnd(6)}  ${u.email}  /  ${u.password}`)
+    } else {
+      console.log(`  · ${u.role.padEnd(6)}  ${u.email} (already exists)`)
+    }
   }
 }
 
@@ -231,7 +239,7 @@ async function main() {
   console.log('\n── PakWheels Clone Seed ──────────────────────────────────')
   await seedMakesAndModels()
   await seedCities()
-  await seedAdminUser()
+  await seedTestUsers()
   console.log('── Done ──────────────────────────────────────────────────\n')
 }
 

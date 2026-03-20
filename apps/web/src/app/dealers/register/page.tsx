@@ -23,7 +23,7 @@ import { useRegisterDealer } from '@/lib/hooks/use-dealers'
 // ─── Schema ───────────────────────────────────────────────────────────────────
 
 const schema = z.object({
-  name: z.string().min(2, 'Dealership name is required').max(120),
+  name: z.string().min(2, 'Business name is required').max(120),
   cityId: z.string().min(1, 'City is required'),
   phone: z.string().min(7, 'Phone number is required').max(20),
   address: z.string().max(200).optional(),
@@ -62,28 +62,28 @@ export default function DealerRegisterPage() {
             <Building2 className="h-6 w-6 text-brand-600" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-surface-900">Become a Dealer</h1>
+            <h1 className="text-2xl font-bold text-surface-900">Become a Supplier</h1>
             <p className="text-surface-500 mt-1">
-              Register your dealership to list unlimited cars and reach more buyers.
+              Register your business to list unlimited machines and reach more buyers worldwide.
             </p>
           </div>
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Dealership Details</CardTitle>
+            <CardTitle className="text-base">Business Details</CardTitle>
             <CardDescription>
-              This information will appear on your public dealer profile.
+              This information will appear on your public supplier profile.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
               {/* Dealership name */}
               <div className="space-y-1.5">
-                <Label htmlFor="name">Dealership Name *</Label>
+                <Label htmlFor="name">Business Name *</Label>
                 <Input
                   id="name"
-                  placeholder="e.g. Al-Fatah Motors"
+                  placeholder="e.g. Pakistan CNC Solutions"
                   {...register('name')}
                   className={errors.name ? 'border-red-500' : ''}
                 />
@@ -130,7 +130,7 @@ export default function DealerRegisterPage() {
                 <Label htmlFor="address">Address</Label>
                 <Input
                   id="address"
-                  placeholder="e.g. Shop 12, Auto Market, Lahore"
+                  placeholder="e.g. Plot 12, Industrial Area, Lahore"
                   {...register('address')}
                 />
               </div>
@@ -162,11 +162,11 @@ export default function DealerRegisterPage() {
 
               {/* Description */}
               <div className="space-y-1.5">
-                <Label htmlFor="description">About Your Dealership</Label>
+                <Label htmlFor="description">About Your Business</Label>
                 <Textarea
                   id="description"
                   rows={4}
-                  placeholder="Tell buyers about your dealership, specialties, years in business..."
+                  placeholder="Tell buyers about your business, machine specialties, years in industry..."
                   {...register('description')}
                 />
               </div>
@@ -176,7 +176,7 @@ export default function DealerRegisterPage() {
                 className="w-full"
                 isLoading={registerDealer.isPending}
               >
-                Create Dealer Profile
+                Create Supplier Profile
               </Button>
             </form>
           </CardContent>

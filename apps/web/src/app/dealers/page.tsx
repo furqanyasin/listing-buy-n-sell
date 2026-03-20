@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { MapPin, CheckCircle, Car, Plus } from 'lucide-react'
+import { MapPin, CheckCircle, Cog, Plus } from 'lucide-react'
 import { PageWrapper } from '@/components/layout'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -57,7 +57,7 @@ function DealerCard({ dealer }: { dealer: Dealer }) {
         )}
 
         <div className="flex items-center gap-1 text-xs text-surface-400 pt-1">
-          <Car className="h-3 w-3" />
+          <Cog className="h-3 w-3" />
           <span>{dealer.listingsCount} active listing{dealer.listingsCount !== 1 ? 's' : ''}</span>
         </div>
       </div>
@@ -72,13 +72,13 @@ export default function DealersPage() {
     <PageWrapper contained>
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-surface-900">Car Dealers</h1>
-          <p className="text-surface-500 mt-1">Browse verified dealers across Pakistan.</p>
+          <h1 className="text-2xl font-bold text-surface-900">Machine Suppliers</h1>
+          <p className="text-surface-500 mt-1">Browse verified suppliers across Pakistan.</p>
         </div>
         <Button asChild>
           <Link href="/dealers/register">
             <Plus className="h-4 w-4" />
-            Become a Dealer
+            Become a Supplier
           </Link>
         </Button>
       </div>
@@ -91,11 +91,11 @@ export default function DealersPage() {
         </div>
       ) : dealers.length === 0 ? (
         <div className="text-center py-20 text-surface-400">
-          <Car className="h-12 w-12 mx-auto mb-3 opacity-30" />
-          <p className="font-medium">No dealers yet</p>
+          <Cog className="h-12 w-12 mx-auto mb-3 opacity-30" />
+          <p className="font-medium">No suppliers yet</p>
           <p className="text-sm mt-1">
             <Link href="/dealers/register" className="text-brand-500 hover:underline">
-              Register your dealership
+              Register as a supplier
             </Link>{' '}
             to get listed here.
           </p>

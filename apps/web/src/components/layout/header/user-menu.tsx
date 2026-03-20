@@ -4,12 +4,13 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import {
   LayoutDashboard,
-  Car,
+  Cog,
   Heart,
   MessageSquare,
   Settings,
   LogOut,
   ChevronDown,
+  Shield,
 } from 'lucide-react'
 import {
   DropdownMenu,
@@ -27,8 +28,8 @@ import { cn } from '@/lib/utils'
 
 const menuItems = [
   { label: 'My Dashboard', href: '/dashboard', icon: LayoutDashboard },
-  { label: 'My Ads', href: '/dashboard/ads', icon: Car },
-  { label: 'Saved Cars', href: '/dashboard/saved', icon: Heart },
+  { label: 'My Listings', href: '/dashboard/ads', icon: Cog },
+  { label: 'Saved Machines', href: '/dashboard/saved', icon: Heart },
   { label: 'Messages', href: '/dashboard/messages', icon: MessageSquare },
   { label: 'Account Settings', href: '/dashboard/settings', icon: Settings },
 ]
@@ -97,6 +98,14 @@ export function UserMenu() {
               </Link>
             </DropdownMenuItem>
           ))}
+          {(user.role === 'ADMIN' || user.role === 'EDITOR') && (
+            <DropdownMenuItem asChild>
+              <Link href="/dashboard/admin" className="flex items-center gap-2 cursor-pointer">
+                <Shield className="h-4 w-4 text-brand-500" />
+                <span className="text-brand-600 font-medium">Admin Panel</span>
+              </Link>
+            </DropdownMenuItem>
+          )}
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />

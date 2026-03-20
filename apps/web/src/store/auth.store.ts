@@ -23,11 +23,21 @@ export const useAuthStore = create<AuthState>()(
       isAuthenticated: false,
       isLoading: false,
 
-      setAuth: (user, accessToken) =>
-        set({ user, accessToken, isAuthenticated: true, isLoading: false }),
+      setAuth: (user, accessToken) => {
+        // Set a cookie so Next.js middleware can detect auth state
+        if (typeof document !== 'undefined') {
+          document.cookie = 'pw_auth_token=1; path=/; max-age=604800; SameSite=Lax'
+        }
+        set({ user, accessToken, isAuthenticated: true, isLoading: false })
+      },
 
-      clearAuth: () =>
-        set({ user: null, accessToken: null, isAuthenticated: false }),
+      clearAuth: () => {
+        // Clear the middleware cookie on logout
+        if (typeof document !== 'undefined') {
+          document.cookie = 'pw_auth_token=; path=/; max-age=0; SameSite=Lax'
+        }
+        set({ user: null, accessToken: null, isAuthenticated: false })
+      },
 
       setLoading: (isLoading) => set({ isLoading }),
     }),

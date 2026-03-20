@@ -70,7 +70,7 @@ Service URLs:
 - Swagger auto-generated at `/api/docs` (development only)
 - Rate limiting via `@nestjs/throttler`, caching via `@nestjs/cache-manager` + Redis
 
-**Implemented API routes (as of Phase 10):**
+**Implemented API routes (as of Phase 17 — all phases complete):**
 - `GET /auth/*` — register, login, refresh, logout, forgot-password, reset-password
 - `GET|PATCH /users/me` — profile
 - `GET /reference/makes` · `GET /reference/makes/:id/models` · `GET /reference/cities` — public, no auth
@@ -86,6 +86,11 @@ Service URLs:
 - `PATCH /auth/change-password` — JWT, verify current password then update
 - `POST /favorites/:listingId` · `GET /favorites` · `GET /favorites/ids` — JWT
 - `POST /conversations` · `GET /conversations` · `GET /conversations/:id` · `POST /conversations/:id/messages` · `PATCH /conversations/:id/read` — JWT
+- `GET /blog` · `GET /blog/categories` · `GET /blog/:slug` — public
+- `GET /blog/admin/all` · `GET /blog/admin/:id` · `POST /blog` · `PATCH /blog/:id` · `DELETE /blog/:id` — ADMIN/EDITOR
+- `POST /reviews` — JWT; `GET /reviews/user/:userId` · `GET /reviews/dealer/:dealerId` — public
+- `GET /notifications` · `GET /notifications/unread-count` · `PATCH /notifications/:id/read` · `PATCH /notifications/read-all` — JWT
+- `GET /admin/stats` · `GET /admin/listings/pending` · `PATCH /admin/listings/:id/approve|reject|featured` · `GET /admin/users` · `PATCH /admin/users/:id/ban|role` — ADMIN
 
 ### Web (Next.js 15)
 - App Router in `src/app/`
@@ -95,7 +100,7 @@ Service URLs:
 - Protected routes via Next.js middleware at `src/middleware.ts`
 - Path alias: `@/` maps to `src/`
 
-**Implemented pages (as of Phase 10):**
+**Implemented pages (as of Phase 17 — all phases complete):**
 - `/` — homepage with hero, featured listings, browse by brand, features, CTA
 - `/auth/login` · `/auth/register` · `/auth/forgot-password` · `/auth/reset-password`
 - `/cars` — listings index (URL-synced filters, active filter chips, search, grid, pagination)
@@ -111,6 +116,14 @@ Service URLs:
 - `/dashboard/saved` — saved/favorited listings grid
 - `/dashboard/messages` — conversations list (15s polling)
 - `/dashboard/messages/[id]` — message thread (3s polling, auto-scroll)
+- `/blog` — blog listing page with category filter pills
+- `/blog/[slug]` — blog detail (SEO metadata, Schema.org, author avatar, tags)
+- `/dashboard/notifications` — notification list with mark-as-read, unread badge in header
+- `/dashboard/admin` — admin overview (stats, quick links)
+- `/dashboard/admin/listings` — pending listings moderation (approve/reject/feature)
+- `/dashboard/admin/users` — user management (ban/unban, role change)
+- `/dashboard/admin/blog` — blog CMS (list, new, edit)
+- `/dealers/[slug]` — now includes reviews section with star rating + leave-review form
 
 **Key frontend components:**
 - `components/listings/listing-card.tsx` — card with PKR Lakh/Crore price formatting
@@ -124,6 +137,13 @@ Service URLs:
 - `lib/hooks/use-dealers.ts` — `useDealers`, `useDealer`, `useMyDealer`, `useRegisterDealer`, `useUpdateDealer`
 - `lib/api/users.ts` — `updateProfileApi`
 - `lib/hooks/use-user.ts` — `useProfile`, `useUpdateProfile`, `useChangePassword`
+- `lib/hooks/use-blog.ts` — `useBlogPosts`, `useBlogPost`, `useAdminBlogPosts`, CRUD hooks
+- `lib/hooks/use-reviews.ts` — `useUserReviews`, `useDealerReviews`, `useCreateReview`
+- `lib/hooks/use-notifications.ts` — `useNotifications`, `useUnreadCount`, `useMarkRead`, `useMarkAllRead`
+- `lib/hooks/use-admin.ts` — `useAdminStats`, `usePendingListings`, `useApproveListing`, `useAdminUsers`, etc.
+- `lib/api/blog.ts` — blog API functions
+- `lib/api/notifications.ts` — notifications API functions
+- `lib/api/admin.ts` — admin API functions
 
 ### Shared Packages
 - `@pw-clone/types` — consumed by both api and web. Types are in `packages/types/src/`. After editing, types must be rebuilt or Turborepo handles it via `turbo run build`.

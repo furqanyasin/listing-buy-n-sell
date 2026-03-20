@@ -3,16 +3,16 @@ import { Separator } from '@/components/ui/separator'
 
 const FOOTER_LINKS = {
   'Buy & Sell': [
-    { label: 'Used Cars', href: '/cars' },
-    { label: 'New Cars', href: '/new-cars' },
-    { label: 'Bikes', href: '/bikes' },
-    { label: 'Post an Ad', href: '/post-ad' },
-    { label: 'Dealers', href: '/dealers' },
+    { label: 'Used Machines', href: '/cars' },
+    { label: 'New Machines', href: '/new-cars' },
+    { label: 'Parts & Accessories', href: '/parts' },
+    { label: 'List a Machine', href: '/post-ad' },
+    { label: 'Suppliers', href: '/dealers' },
   ],
   'Research': [
-    { label: 'Car Reviews', href: '/blog/reviews' },
+    { label: 'Machine Reviews', href: '/blog/reviews' },
     { label: 'Price Guide', href: '/prices' },
-    { label: 'Compare Cars', href: '/new-cars/compare' },
+    { label: 'Compare Machines', href: '/new-cars/compare' },
     { label: 'Inspection Services', href: '/inspection' },
     { label: 'Blog', href: '/blog' },
   ],
@@ -20,8 +20,8 @@ const FOOTER_LINKS = {
     { label: 'Sign In', href: '/auth/login' },
     { label: 'Register', href: '/auth/register' },
     { label: 'My Dashboard', href: '/dashboard' },
-    { label: 'My Ads', href: '/dashboard/ads' },
-    { label: 'Saved Cars', href: '/dashboard/saved' },
+    { label: 'My Listings', href: '/dashboard/ads' },
+    { label: 'Saved Machines', href: '/dashboard/saved' },
   ],
   'Company': [
     { label: 'About Us', href: '/about' },
@@ -92,9 +92,9 @@ export function Footer() {
         {/* App downloads CTA */}
         <div className="mt-12 p-6 bg-surface-800 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            <p className="text-white font-semibold text-lg">Get the PW Clone App</p>
+            <p className="text-white font-semibold text-lg">Get the CNC Machine Bazaar App</p>
             <p className="text-surface-400 text-sm mt-1">
-              Browse and post cars on the go. Available for Android & iOS.
+              Browse and list machines on the go. Available for Android & iOS.
             </p>
           </div>
           <div className="flex gap-3 shrink-0">
@@ -128,10 +128,10 @@ export function Footer() {
           {/* Logo + copyright */}
           <div className="flex items-center gap-3">
             <div className="w-7 h-7 rounded-lg bg-brand-500 flex items-center justify-center">
-              <span className="text-white font-black text-xs">PW</span>
+              <span className="text-white font-black text-xs">CMB</span>
             </div>
             <span className="text-surface-400 text-sm">
-              © {new Date().getFullYear()} PW Clone. All rights reserved.
+              © {new Date().getFullYear()} CNC Machine Bazaar. All rights reserved.
             </span>
           </div>
 
