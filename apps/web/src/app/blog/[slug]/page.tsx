@@ -1,10 +1,8 @@
 import { Suspense } from 'react'
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, Calendar, Eye, Tag } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import { PageWrapper } from '@/components/layout'
-import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 import { BlogPostClient } from './blog-post-client'
 

@@ -6,7 +6,6 @@ import Link from 'next/link'
 import { ExternalLink, CheckCircle, XCircle, Star } from 'lucide-react'
 import { PageWrapper } from '@/components/layout'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApproveListing, usePendingListings, useRejectListing, useToggleFeatured } from '@/lib/hooks/use-admin'
 
@@ -53,6 +52,7 @@ export default function AdminListingsPage() {
           </div>
         ) : listings && listings.length > 0 ? (
           <div className="space-y-4">
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             {listings.map((listing: any) => {
               const img = listing.images?.[0]
               return (

@@ -4,7 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common'
-import { BlogPostStatus, Prisma, UserRole } from '@prisma/client'
+import { BlogPostStatus, Prisma } from '@prisma/client'
 import { PrismaService } from '../../prisma/prisma.service'
 import { CreateBlogPostDto } from './dto/create-blog-post.dto'
 import { UpdateBlogPostDto } from './dto/update-blog-post.dto'

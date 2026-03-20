@@ -92,7 +92,6 @@ export default async function ListingDetailPage({ params }: Props) {
       {schema && (
         <script
           type="application/ld+json"
-          // eslint-disable-line react/no-danger
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       )}
