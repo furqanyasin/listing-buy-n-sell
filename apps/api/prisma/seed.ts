@@ -337,7 +337,9 @@ const DUMMY_LISTINGS: DummyListing[] = [
 async function seedMakesAndModels() {
   console.log('Seeding brands and models...')
 
-  // Clear old automotive makes/models
+  // Clear dependent records first, then makes/models
+  await prisma.listingImage.deleteMany({})
+  await prisma.listing.deleteMany({})
   await prisma.vehicleModel.deleteMany({})
   await prisma.make.deleteMany({})
 
@@ -450,12 +452,7 @@ async function seedDummyListings() {
     return
   }
 
-  // Check if listings already exist
-  const existingCount = await prisma.listing.count()
-  if (existingCount > 0) {
-    console.log(`  · ${existingCount} listings already exist, skipping`)
-    return
-  }
+  // Listings were cleared above during brand seeding, so always re-create
 
   let created = 0
   for (const listing of DUMMY_LISTINGS) {
