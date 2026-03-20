@@ -1,21 +1,19 @@
-// ─── Listing / Vehicle Types ──────────────────────────────────────────────────
+// ─── Listing / Machine Types ──────────────────────────────────────────────────
 
 import type { User } from './user.types'
 import type { City, Make, VehicleModel, CurrencyCode } from './common.types'
 
-export type FuelType = 'PETROL' | 'DIESEL' | 'HYBRID' | 'ELECTRIC' | 'CNG' | 'LPG'
+export type FuelType = 'ELECTRIC' | 'HYDRAULIC' | 'PNEUMATIC' | 'DIESEL' | 'MANUAL'
 export type TransmissionType = 'AUTOMATIC' | 'MANUAL'
 export type BodyType =
-  | 'SEDAN'
-  | 'SUV'
-  | 'HATCHBACK'
-  | 'PICKUP'
-  | 'VAN'
-  | 'TRUCK'
-  | 'COUPE'
-  | 'CONVERTIBLE'
-  | 'WAGON'
-  | 'OTHER'
+  | 'CNC_MILL'
+  | 'CNC_LATHE'
+  | 'LASER_CUTTER'
+  | 'CNC_ROUTER'
+  | 'PRESS_BRAKE'
+  | 'WATERJET'
+  | 'PLASMA_CUTTER'
+  | '3D_PRINTER'
 export type VehicleCondition = 'NEW' | 'USED'
 export type ListingStatus = 'DRAFT' | 'PENDING' | 'ACTIVE' | 'SOLD' | 'EXPIRED' | 'REJECTED'
 
