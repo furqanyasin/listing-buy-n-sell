@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-// ─── Schema.org Vehicle markup ────────────────────────────────────────────────
+// ─── Schema.org Product markup ────────────────────────────────────────────────
 
 async function getListingForSchema(id: string) {
   try {

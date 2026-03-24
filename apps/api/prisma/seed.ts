@@ -338,6 +338,9 @@ async function seedMakesAndModels() {
   console.log('Seeding brands and models...')
 
   // Clear dependent records first, then makes/models
+  await prisma.message.deleteMany({})
+  await prisma.conversation.deleteMany({})
+  await prisma.favorite.deleteMany({})
   await prisma.listingImage.deleteMany({})
   await prisma.listing.deleteMany({})
   await prisma.vehicleModel.deleteMany({})

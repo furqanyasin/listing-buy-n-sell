@@ -120,16 +120,16 @@ export default function EditListingPage() {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-          {/* Vehicle Info */}
+          {/* Machine Info */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Vehicle Information</CardTitle>
+              <CardTitle className="text-base">Machine Information</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {/* Make + Model */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <Label>Make *</Label>
+                  <Label>Brand *</Label>
                   <Controller
                     name="makeId"
                     control={control}
@@ -231,23 +231,30 @@ export default function EditListingPage() {
                 </div>
               </div>
 
-              {/* Body + Fuel + Transmission */}
+              {/* Machine Type + Power Type + Control Type */}
               <div className="grid grid-cols-3 gap-4">
                 <div className="space-y-1.5">
-                  <Label>Body Type *</Label>
+                  <Label>Machine Type *</Label>
                   <Controller
                     name="bodyType"
                     control={control}
                     render={({ field }) => (
                       <Select value={field.value} onValueChange={field.onChange}>
                         <SelectTrigger error={!!errors.bodyType}>
-                          <SelectValue placeholder="Body" />
+                          <SelectValue placeholder="Machine type" />
                         </SelectTrigger>
                         <SelectContent>
-                          {['SEDAN','SUV','HATCHBACK','PICKUP','VAN','TRUCK','COUPE','CONVERTIBLE','WAGON','OTHER'].map((v) => (
-                            <SelectItem key={v} value={v}>
-                              {v.charAt(0) + v.slice(1).toLowerCase()}
-                            </SelectItem>
+                          {[
+                            { value: 'CNC_MILL', label: 'CNC Mill' },
+                            { value: 'CNC_LATHE', label: 'CNC Lathe' },
+                            { value: 'LASER_CUTTER', label: 'Laser Cutter' },
+                            { value: 'CNC_ROUTER', label: 'CNC Router' },
+                            { value: 'PRESS_BRAKE', label: 'Press Brake' },
+                            { value: 'WATERJET', label: 'Waterjet' },
+                            { value: 'PLASMA_CUTTER', label: 'Plasma Cutter' },
+                            { value: 'PRINTER_3D', label: '3D Printer' },
+                          ].map((v) => (
+                            <SelectItem key={v.value} value={v.value}>{v.label}</SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
@@ -255,18 +262,24 @@ export default function EditListingPage() {
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <Label>Fuel *</Label>
+                  <Label>Power Type *</Label>
                   <Controller
                     name="fuelType"
                     control={control}
                     render={({ field }) => (
                       <Select value={field.value} onValueChange={field.onChange}>
                         <SelectTrigger error={!!errors.fuelType}>
-                          <SelectValue placeholder="Fuel" />
+                          <SelectValue placeholder="Power type" />
                         </SelectTrigger>
                         <SelectContent>
-                          {['PETROL','DIESEL','HYBRID','ELECTRIC','CNG','LPG'].map((v) => (
-                            <SelectItem key={v} value={v}>{v}</SelectItem>
+                          {[
+                            { value: 'ELECTRIC', label: 'Electric' },
+                            { value: 'HYDRAULIC', label: 'Hydraulic' },
+                            { value: 'PNEUMATIC', label: 'Pneumatic' },
+                            { value: 'DIESEL', label: 'Diesel' },
+                            { value: 'MANUAL', label: 'Manual' },
+                          ].map((v) => (
+                            <SelectItem key={v.value} value={v.value}>{v.label}</SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
@@ -274,17 +287,17 @@ export default function EditListingPage() {
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <Label>Transmission *</Label>
+                  <Label>Control Type *</Label>
                   <Controller
                     name="transmission"
                     control={control}
                     render={({ field }) => (
                       <Select value={field.value} onValueChange={field.onChange}>
                         <SelectTrigger error={!!errors.transmission}>
-                          <SelectValue placeholder="Trans" />
+                          <SelectValue placeholder="Control type" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="AUTOMATIC">Automatic</SelectItem>
+                          <SelectItem value="AUTOMATIC">CNC (Automated)</SelectItem>
                           <SelectItem value="MANUAL">Manual</SelectItem>
                         </SelectContent>
                       </Select>
@@ -293,10 +306,10 @@ export default function EditListingPage() {
                 </div>
               </div>
 
-              {/* Mileage + Color */}
+              {/* Running Hours + Color */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <Label htmlFor="mileage">Mileage (km) *</Label>
+                  <Label htmlFor="mileage">Running Hours *</Label>
                   <Input
                     id="mileage"
                     type="number"

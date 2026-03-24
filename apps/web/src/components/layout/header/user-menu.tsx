@@ -28,7 +28,7 @@ import { cn } from '@/lib/utils'
 
 const menuItems = [
   { label: 'My Dashboard', href: '/dashboard', icon: LayoutDashboard },
-  { label: 'My Listings', href: '/dashboard/ads', icon: Cog },
+  { label: 'My Listings', href: '/dashboard', icon: Cog },
   { label: 'Saved Machines', href: '/dashboard/saved', icon: Heart },
   { label: 'Messages', href: '/dashboard/messages', icon: MessageSquare },
   { label: 'Account Settings', href: '/dashboard/settings', icon: Settings },

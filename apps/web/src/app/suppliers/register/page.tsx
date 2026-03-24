@@ -78,7 +78,7 @@ export default function DealerRegisterPage() {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-              {/* Dealership name */}
+              {/* Business name */}
               <div className="space-y-1.5">
                 <Label htmlFor="name">Business Name *</Label>
                 <Input

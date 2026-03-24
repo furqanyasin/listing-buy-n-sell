@@ -70,7 +70,7 @@ function filtersToParams(f: ListingFilters): string {
 
 // ─── Inner component (uses useSearchParams — must be inside Suspense) ─────────
 
-function CarsContent() {
+function MachinesContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
 
@@ -224,7 +224,7 @@ function CarsContent() {
 
 // ─── Page export — wraps inner component in Suspense ─────────────────────────
 
-export default function CarsPage() {
+export default function MachinesPage() {
   return (
     <PageWrapper>
       <Suspense
@@ -241,7 +241,7 @@ export default function CarsPage() {
           </div>
         }
       >
-        <CarsContent />
+        <MachinesContent />
       </Suspense>
     </PageWrapper>
   )

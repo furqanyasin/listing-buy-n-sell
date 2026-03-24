@@ -140,7 +140,7 @@ export function Header() {
                     </Link>
                   </Button>
 
-                  {/* Post Ad */}
+                  {/* List Machine */}
                   <Button size="sm" className="hidden sm:inline-flex gap-1.5" asChild>
                     <Link href="/list-machine">
                       <Plus className="h-4 w-4" />
@@ -165,11 +165,11 @@ export function Header() {
                   <Button size="sm" className="hidden lg:inline-flex" asChild>
                     <Link href="/auth/register">Register</Link>
                   </Button>
-                  {/* Mobile: Post Ad shortcut */}
+                  {/* Mobile: List Machine shortcut */}
                   <Button size="sm" className="lg:hidden gap-1.5" asChild>
                     <Link href="/list-machine">
                       <Plus className="h-4 w-4" />
-                      <span className="hidden xs:inline">Post Ad</span>
+                      <span className="hidden xs:inline">List Machine</span>
                     </Link>
                   </Button>
                 </>
